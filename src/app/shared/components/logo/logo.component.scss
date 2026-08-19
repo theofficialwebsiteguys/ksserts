@@ -1,0 +1,43 @@
+:host {
+  display: inline-flex;
+  height: 100%;
+}
+
+.app-logo {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.app-logo--mark {
+  aspect-ratio: 1 / 1;
+}
+
+.app-logo-fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  color: var(--color-cocoa-900);
+}
+
+.app-logo-fallback--light {
+  color: var(--color-cream-50);
+}
+
+.app-logo-fallback__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.app-logo-fallback__word {
+  font-weight: 700;
+  font-size: 1.6rem;
+}

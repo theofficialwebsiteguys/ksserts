@@ -1,0 +1,240 @@
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  padding-block: var(--space-2xl);
+}
+
+.section--tight {
+  padding-block: var(--space-xl);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+.eyebrow--on-dark {
+  color: var(--color-tan-300);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.5rem;
+  height: 2px;
+  background: currentColor;
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  z-index: 1000;
+  background: var(--color-navy-900);
+  color: var(--color-cream-50);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+// ---- Buttons ----------------------------------------------------------
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  padding: 0.9rem 1.75rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: var(--fs-body-md);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  border: 1.5px solid transparent;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.btn:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background: var(--color-brand-accent);
+  color: var(--color-cream-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:not(:disabled):hover {
+  background: var(--color-brand-accent-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--outline-light {
+  background: transparent;
+  border-color: rgba(253, 248, 240, 0.55);
+  color: var(--color-cream-50);
+}
+
+.btn--outline-light:not(:disabled):hover {
+  background: rgba(253, 248, 240, 0.12);
+  border-color: var(--color-cream-50);
+}
+
+.btn--outline-dark {
+  background: transparent;
+  border-color: var(--color-navy-700);
+  color: var(--color-navy-900);
+}
+
+.btn--outline-dark:not(:disabled):hover {
+  background: var(--color-navy-900);
+  color: var(--color-cream-50);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-brand-accent);
+  padding-inline: 0.5rem;
+}
+
+.btn--ghost:not(:disabled):hover {
+  color: var(--color-brand-accent-hover);
+}
+
+.btn--sm {
+  padding: 0.6rem 1.25rem;
+  font-size: var(--fs-body-sm);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+// ---- Reveal-on-scroll ----------------------------------------------------
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// ---- Decorative cutout reveal (scroll-in dessert photos) -----------------
+// Sits behind text (never intercepts clicks/taps) and never resizes layout —
+// always position:absolute against a `position: relative` section.
+
+.site-cutout {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.55) rotate(var(--cutout-rotate, 0deg));
+  transition: opacity 0.7s var(--ease-out), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 12px 20px rgba(8, 16, 24, 0.3));
+  pointer-events: none;
+}
+
+.site-cutout.is-visible {
+  opacity: 1;
+  transform: scale(1) rotate(var(--cutout-rotate, 0deg));
+}
+
+// For cutouts flush against a page edge (torn/cropped source edge lined up
+// with the viewport edge) — slides in from off-screen instead of scaling up,
+// reads like it's entering the frame rather than growing out of nothing.
+.site-cutout--edge {
+  transform: translateX(var(--cutout-enter-x, -48px));
+}
+
+.site-cutout--edge.is-visible {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-cutout {
+    transition: none;
+  }
+}
+
+// ---- Skeleton loading ----------------------------------------------------
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-block {
+  background: linear-gradient(90deg, var(--color-tan-200) 25%, var(--color-tan-300) 37%, var(--color-tan-200) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block {
+    animation: none;
+  }
+}
+
+// ---- Misc ----------------------------------------------------------
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}

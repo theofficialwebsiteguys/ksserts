@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  <!-- <img
+    src="/assets/cutouts/cutout-10.png"
+    alt=""
+    class="site-footer__cutout"
+    appCutoutReveal
+  /> -->
+
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a routerLink="/" aria-label="K'sserts Cookie Café — Home" class="site-footer__logo">
+        <app-logo variant="full" theme="dark" />
+      </a>
+      <p class="site-footer__mission">
+        Handcrafted, allergy-conscious desserts made with love in memory of Gabriel — because
+        <strong>no one should be left out of dessert.</strong>
+      </p>
+      <app-social-links />
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      <h2 class="site-footer__heading">Explore</h2>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/our-story">Our Story</a></li>
+        <li><a routerLink="/shop">Shop</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p class="site-footer__tagline">No One Left Out of Dessert.</p>
+    <p class="site-footer__copyright">&copy; {{ year }} K'sserts Cookie Café. All rights reserved.</p>
+  </div>
+</footer>

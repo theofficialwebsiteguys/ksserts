@@ -1,0 +1,46 @@
+<section class="hero">
+  <div class="hero__texture" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--coral" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--sky" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--violet" aria-hidden="true"></div>
+
+  <div class="hero__cutouts" aria-hidden="true">
+    <img src="/assets/cutouts/cutout-1.png" alt="" class="hero__cutout hero__cutout--1" loading="eager" />
+    <img src="/assets/cutouts/cutout-2.png" alt="" class="hero__cutout hero__cutout--2" loading="eager" />
+    <img src="/assets/cutouts/cutout-3.png" alt="" class="hero__cutout hero__cutout--3" loading="eager" />
+    <img src="/assets/cutouts/cutout-5.png" alt="" class="hero__cutout hero__cutout--4" loading="eager" />
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__logo-wrap">
+      <app-logo variant="full" theme="dark" [eager]="true" alt="K'sserts Cookie Café logo" />
+    </div>
+
+    <p class="eyebrow">Handcrafted &middot; Inclusive &middot; Made With Love</p>
+
+    <h1 class="hero__headline text-balance">No One Left Out of Dessert.</h1>
+
+    <p class="hero__subtext text-balance">
+      K'sserts Cookie Café bakes handcrafted cookies and desserts with real options for gluten-free,
+      vegan, and sugar-conscious guests — so everyone at the table gets to celebrate together.
+    </p>
+
+    <div class="hero__ctas">
+      <a routerLink="/shop" class="btn btn--primary">Shop K'sserts</a>
+      <a routerLink="/our-story" class="btn btn--outline-dark">Our Story</a>
+    </div>
+  </div>
+
+  @if (marqueeImages().length) {
+    <div class="hero__marquee" aria-hidden="true">
+      <div class="hero__marquee-track">
+        @for (image of marqueeImages(); track image.url + '-a') {
+          <img [src]="image.url" alt="" loading="lazy" />
+        }
+        @for (image of marqueeImages(); track image.url + '-b') {
+          <img [src]="image.url" alt="" loading="lazy" />
+        }
+      </div>
+    </div>
+  }
+</section>

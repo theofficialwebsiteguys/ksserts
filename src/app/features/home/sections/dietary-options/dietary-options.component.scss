@@ -1,0 +1,137 @@
+.dietary {
+  position: relative;
+  overflow: hidden;
+}
+
+.dietary__cutout {
+  position: absolute;
+  z-index: 0;
+}
+
+.dietary__cutout--1 {
+  top: -1rem;
+  right: 2%;
+  width: 320px;
+  opacity: 0.85;
+  --cutout-rotate: 9deg;
+}
+
+.dietary__cutout--2 {
+  bottom: -2rem;
+  left: 1%;
+  width: 500px;
+  opacity: 0.85;
+  --cutout-rotate: -8deg;
+}
+
+@media (max-width: 1100px) {
+  .dietary__cutout--1,
+  .dietary__cutout--2 {
+    width: 200px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dietary__cutout {
+    display: none;
+  }
+}
+
+.dietary__header {
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.dietary__title {
+  font-size: var(--fs-display-md);
+  margin-block: var(--space-xs);
+}
+
+.dietary__intro {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body-lg);
+}
+
+.dietary__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.dietary-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.dietary-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.dietary-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--color-coral-300);
+  color: var(--color-brand-accent);
+  margin-bottom: var(--space-sm);
+}
+
+// Cycles through the heart's own gradient hues (coral → sky → violet)
+// across the four cards — a subtle, tasteful nod, not a loud rainbow.
+.dietary-card:nth-child(2) .dietary-card__icon {
+  background: var(--color-accent-sky-pale);
+  color: var(--color-accent-sky-deep);
+}
+
+.dietary-card:nth-child(3) .dietary-card__icon {
+  background: var(--color-accent-violet-pale);
+  color: var(--color-accent-violet-deep);
+}
+
+.dietary-card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.dietary-card__title {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-3xs);
+}
+
+.dietary-card__desc {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body-sm);
+}
+
+.dietary__cta {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 900px) {
+  .dietary__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .dietary__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,264 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  // A short dark-navy cap at the very top keeps the fixed header's light
+  // logo/nav legible (it overlays transparently here, same as every other
+  // page), then opens into a bright, warm cream — the header is the only
+  // dark note left in this section.
+  background: linear-gradient(
+    180deg,
+    var(--color-navy-900) 0,
+    var(--color-navy-700) 88px,
+    var(--color-tan-300) 230px,
+    var(--color-cream-50) 480px
+  );
+  color: var(--color-text);
+  padding-top: calc(var(--header-height) + var(--space-md));
+  padding-bottom: var(--space-md);
+}
+
+.hero__texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  background-image: radial-gradient(rgba(69, 58, 61, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.hero__glow--coral {
+  width: 26rem;
+  height: 26rem;
+  background: rgba(228, 116, 120, 0.28);
+  top: 2rem;
+  right: -6rem;
+}
+
+.hero__glow--sky {
+  width: 20rem;
+  height: 20rem;
+  background: rgba(112, 196, 234, 0.22);
+  bottom: -8rem;
+  left: -4rem;
+}
+
+.hero__glow--violet {
+  width: 14rem;
+  height: 14rem;
+  background: rgba(120, 78, 228, 0.12);
+  top: 45%;
+  left: 8%;
+}
+
+// Playful dessert cutouts, scattered in the side margins so they never sit
+// behind the headline. Positioned from the hero's own edges (not percentages
+// of its height) so they hold their spot regardless of how tall the content
+// makes the section. Hidden below tablet width — not enough margin to place
+// them without covering text once the content column goes full-width.
+.hero__cutouts {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__cutout {
+  position: absolute;
+  width: var(--cutout-size, 120px);
+  opacity: 0;
+  filter: drop-shadow(0 12px 20px rgba(8, 16, 24, 0.35));
+  animation: hero-cutout-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) var(--cutout-delay, 0s) forwards;
+}
+
+@keyframes hero-cutout-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(var(--cutout-rotate, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(var(--cutout-rotate, 0deg));
+  }
+}
+
+.hero__cutout--1 {
+  --cutout-size: 200px;
+  --cutout-rotate: -13deg;
+  --cutout-delay: 0.15s;
+  top: 5.5rem;
+  left: 9%;
+}
+
+.hero__cutout--2 {
+  --cutout-size: 165px;
+  --cutout-rotate: 9deg;
+  --cutout-delay: 0.35s;
+  top: 8rem;
+  right: 8%;
+}
+
+.hero__cutout--3 {
+  --cutout-size: 178px;
+  --cutout-rotate: 7deg;
+  --cutout-delay: 0.55s;
+  top: 24rem;
+  left: 13%;
+}
+
+.hero__cutout--4 {
+  --cutout-size: 158px;
+  --cutout-rotate: -10deg;
+  --cutout-delay: 0.7s;
+  bottom: 10.5rem;
+  right: 12%;
+}
+
+@media (max-width: 1199px) {
+  .hero__cutout--3,
+  .hero__cutout--4 {
+    display: none;
+  }
+
+  .hero__cutout--1 {
+    --cutout-size: 140px;
+    left: 4%;
+  }
+
+  .hero__cutout--2 {
+    --cutout-size: 120px;
+    right: 4%;
+  }
+}
+
+@media (max-width: 899px) {
+  .hero__cutouts {
+    display: none;
+  }
+}
+
+.hero__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.hero__logo-wrap {
+  height: 88px;
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hero__headline {
+  font-size: clamp(2.75rem, 2rem + 2.6vw, 4.25rem);
+  line-height: 1.15;
+  color: var(--color-navy-900);
+}
+
+.hero__subtext {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-muted);
+  max-width: 40ch;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+// Normal document flow (not absolutely positioned) so it's always part of
+// the hero's actual height and visible on landing, instead of depending on
+// exactly how tall the viewport happens to be.
+.hero__marquee {
+  position: relative;
+  margin-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+
+.hero__marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  animation: hero-marquee 46s linear infinite;
+}
+
+.hero__marquee-track img {
+  height: 170px;
+  width: 170px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  // box-shadow: 0 14px 28px rgba(8, 16, 24, 0.45);
+}
+
+@keyframes hero-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: calc(var(--header-height) + var(--space-sm));
+    padding-bottom: var(--space-sm);
+  }
+
+  .hero__logo-wrap {
+    height: 76px;
+  }
+
+  .hero__marquee {
+    margin-top: var(--space-sm);
+  }
+
+  .hero__marquee-track img {
+    height: 76px;
+    width: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__logo-wrap {
+    animation: none;
+  }
+
+  .hero__marquee-track {
+    animation: none;
+  }
+
+  .hero__cutout {
+    animation: none;
+    opacity: 1;
+    transform: rotate(var(--cutout-rotate, 0deg));
+  }
+}

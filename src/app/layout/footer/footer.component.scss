@@ -1,0 +1,119 @@
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--color-navy-700), var(--color-navy-950) 65%);
+  color: var(--color-text-on-dark);
+  padding-top: var(--space-2xl);
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: -10rem;
+  right: -6rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: rgba(120, 78, 228, 0.18);
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.site-footer__cutout {
+  position: absolute;
+  z-index: 0;
+  bottom: -2.5rem;
+  right: 4%;
+  width: 230px;
+  opacity: 0.8;
+  --cutout-rotate: -8deg;
+}
+
+@media (max-width: 900px) {
+  .site-footer__cutout {
+    display: none;
+  }
+}
+
+.site-footer__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border-on-dark);
+}
+
+.site-footer__logo {
+  display: inline-block;
+  height: 72px;
+  margin-bottom: var(--space-md);
+}
+
+.site-footer__mission {
+  max-width: 40ch;
+  color: var(--color-text-on-dark-muted);
+  margin-bottom: var(--space-md);
+}
+
+.site-footer__mission strong {
+  color: var(--color-text-on-dark);
+}
+
+.site-footer__heading {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-tan-300);
+  margin-bottom: var(--space-sm);
+}
+
+.site-footer__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.site-footer__nav a {
+  color: var(--color-text-on-dark-muted);
+  transition: color var(--transition-fast);
+}
+
+.site-footer__nav a:hover {
+  color: var(--color-cream-50);
+}
+
+.site-footer__bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-block: var(--space-md);
+  font-size: var(--fs-body-sm);
+}
+
+.site-footer__tagline {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-tan-300);
+}
+
+.site-footer__copyright {
+  color: var(--color-text-on-dark-muted);
+}
+
+@media (max-width: 640px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,91 @@
+@if (cartService.isOpen()) {
+  <div class="cart-backdrop" (click)="close()"></div>
+}
+
+<section
+  #drawerPanel
+  class="cart-drawer"
+  [class.is-open]="cartService.isOpen()"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cart-drawer-title"
+  [attr.aria-hidden]="!cartService.isOpen()"
+>
+  <header class="cart-drawer__header">
+    <h2 id="cart-drawer-title">Your Cart</h2>
+    <button #closeBtn type="button" class="cart-drawer__close" (click)="close()" aria-label="Close cart">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </button>
+  </header>
+
+  @if (cartService.error(); as error) {
+    <p class="cart-drawer__error" role="alert">{{ error }}</p>
+  }
+
+  <div class="cart-drawer__body">
+    @if (cartService.loading() && !cartService.cart()) {
+      <ul class="cart-drawer__skeleton-list">
+        @for (i of [1, 2, 3]; track i) {
+          <li class="skeleton-block cart-drawer__skeleton-line"></li>
+        }
+      </ul>
+    } @else if (!cartService.cart() || cartService.cart()!.lines.length === 0) {
+      <div class="cart-drawer__empty">
+        <p>Your cart is empty.</p>
+        <p class="cart-drawer__empty-sub">Handcrafted treats for everyone are just a click away.</p>
+        <a routerLink="/shop" class="btn btn--primary" (click)="close()">Shop K'sserts</a>
+      </div>
+    } @else {
+      <ul class="cart-drawer__lines">
+        @for (line of cartService.cart()!.lines; track trackLine($index, line)) {
+          <li class="cart-line">
+            @if (line.merchandise.image; as thumb) {
+              <img class="cart-line__image" [src]="thumb.url" [alt]="thumb.altText || line.merchandise.product.title" loading="lazy" />
+            } @else {
+              <div class="cart-line__image cart-line__image--placeholder" aria-hidden="true"></div>
+            }
+
+            <div class="cart-line__details">
+              <p class="cart-line__title">{{ line.merchandise.product.title }}</p>
+              @if (line.merchandise.selectedOptions.length && line.merchandise.selectedOptions[0].value !== 'Default Title') {
+                <p class="cart-line__options">
+                  @for (opt of line.merchandise.selectedOptions; track opt.name) {
+                    <span>{{ opt.name }}: {{ opt.value }}</span>
+                  }
+                </p>
+              }
+              <p class="cart-line__price">{{ formatMoney(line.merchandise.price) }}</p>
+
+              <div class="cart-line__footer">
+                <app-quantity-selector
+                  [value]="line.quantity"
+                  [label]="line.merchandise.product.title"
+                  [disabled]="cartService.loading()"
+                  (valueChange)="onQuantityChange(line, $event)"
+                />
+                <button type="button" class="cart-line__remove" (click)="cartService.removeLine(line.id)" [disabled]="cartService.loading()">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (cartService.cart(); as cart) {
+    @if (cart.lines.length > 0) {
+      <footer class="cart-drawer__footer">
+        <div class="cart-drawer__subtotal">
+          <span>Subtotal</span>
+          <span>{{ formatMoney(cart.cost.subtotalAmount) }}</span>
+        </div>
+        <p class="cart-drawer__note">Shipping, taxes, and discounts calculated at checkout.</p>
+        <a [href]="cart.checkoutUrl" class="btn btn--primary btn--block">Checkout</a>
+      </footer>
+    }
+  }
+</section>

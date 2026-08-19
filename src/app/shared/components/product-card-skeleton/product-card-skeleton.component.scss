@@ -1,0 +1,19 @@
+.product-card-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.product-card-skeleton__image {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+
+.product-card-skeleton__line {
+  height: 0.9rem;
+  width: 70%;
+}
+
+.product-card-skeleton__line--price {
+  width: 35%;
+}

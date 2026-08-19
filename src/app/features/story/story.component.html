@@ -1,0 +1,120 @@
+<section class="story-hero">
+  <img
+    src="/assets/cutouts/cutout-7.png"
+    alt=""
+    class="story-hero__cutout story-hero__cutout--edge site-cutout--edge"
+    style="--cutout-enter-x: -48px"
+    appCutoutReveal
+  />
+  <img
+    src="/assets/cutouts/cutout-9.png"
+    alt=""
+    class="story-hero__cutout story-hero__cutout--corner"
+    appCutoutReveal
+  />
+
+  <div class="container story-hero__inner">
+    <p class="eyebrow">Our Story</p>
+    <h1 class="story-hero__title">Some Dreams Begin With Love</h1>
+    <p class="story-hero__lede text-balance">
+      Some dreams begin with a business plan. Mine began with love, loss, and the belief that even
+      life's hardest moments can inspire something beautiful.
+    </p>
+  </div>
+</section>
+
+<article class="story">
+  <div class="container story__inner">
+    <section class="story-block" appReveal>
+      <h2>A Father's Love</h2>
+      <p>
+        Years ago, my father, Gabriel, was battling diabetes and its devastating complications, including
+        kidney failure. When he needed a kidney transplant, I donated one of my kidneys in the hope of
+        giving him more time with our family. Tragically, just four days after his transplant, he passed
+        away.
+      </p>
+    </section>
+
+    <section class="story-block" appReveal>
+      <h2>Through the Darkest Days</h2>
+      <p>
+        While grieving the loss of my dad, I was also recovering from major surgery. Complications from
+        my own recovery led to a second surgery, leaving me unable to work for nearly a year. During that
+        difficult time, my family faced unimaginable challenges, including losing our home. It felt as
+        though everything we had built had been taken away.
+      </p>
+    </section>
+
+    <blockquote class="story-pullquote" appReveal>
+      But even in the darkest moments, purpose has a way of finding us.
+    </blockquote>
+
+    <section class="story-block" appReveal>
+      <h2>Finding Purpose</h2>
+      <p>
+        My father's battle with diabetes forever changed how I viewed food and the role it plays in
+        bringing people together. I became passionate about creating desserts that everyone could
+        enjoy—including those living with diabetes or dietary restrictions. I began developing recipes
+        for gluten-free, vegan, and sugar-conscious treats, believing that no one should ever feel left
+        out when it's time to celebrate.
+      </p>
+    </section>
+
+    <section class="story-block" appReveal>
+      <h2>From Kitchen to Community</h2>
+      <p>
+        What started as baking in my kitchen grew into K'sserts, a business built on love, resilience, and
+        inclusion. Through local farmers markets, custom orders, and the incredible support of my
+        community, I realized this dream had become much bigger than cookies.
+      </p>
+    </section>
+
+    @if (photoBreak().length) {
+      <div class="story-photobreak" appReveal>
+        @for (image of photoBreak(); track image.url) {
+          <img [src]="image.url" [alt]="''" loading="lazy" />
+        }
+      </div>
+    }
+
+    <section class="story-block story-block--emphasis" appReveal>
+      <h2>The Next Chapter</h2>
+      <p>Today, K'sserts Cookie Café is the next chapter of that journey.</p>
+      <p>
+        My vision is to create a warm, welcoming neighborhood café where people gather over exceptional
+        coffee, handcrafted desserts, and meaningful conversation. A place where families celebrate
+        milestones, friends reconnect, students study, and neighbors feel at home. Whether you're looking
+        for a classic cookie, a gluten-free dessert, a vegan treat, or a sugar-conscious option, you'll
+        always find something made with care.
+      </p>
+    </section>
+
+    <section class="story-block" appReveal>
+      <h2>Giving Back</h2>
+      <p>
+        In honor of my father, giving back will always be part of our mission. Supporting diabetes
+        awareness and creating desserts that bring everyone to the same table are at the heart of
+        everything we do.
+      </p>
+    </section>
+
+    <section class="story-closing" appReveal>
+      <div class="story-closing__mark">
+        <app-logo variant="mark" theme="light" />
+      </div>
+      <p class="story-closing__lede">
+        K'sserts is more than a bakery. It's proof that even after tremendous loss, hope can rise again.
+      </p>
+      <p class="story-closing__text">
+        Thank you for being here, for believing in this dream, and for becoming part of our story.
+      </p>
+      <p class="story-closing__welcome">Welcome to K'sserts Cookie Café.</p>
+      <p class="story-closing__tagline">No One Left Out of Dessert.</p>
+
+      <div class="story-closing__ctas">
+        <a routerLink="/shop" class="btn btn--primary">Shop K'sserts</a>
+        <a routerLink="/contact" class="btn btn--outline-light">Get in Touch</a>
+      </div>
+    </section>
+  </div>
+</article>

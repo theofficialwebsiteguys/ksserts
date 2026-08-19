@@ -1,0 +1,23 @@
+<section
+  class="section section--tight gofundme"
+  [class.gofundme--photo]="backdropImage()"
+  aria-labelledby="gofundme-heading"
+>
+
+  <div class="container gofundme__inner" appReveal>
+    <p class="eyebrow">Support the Dream</p>
+    <h2 id="gofundme-heading" class="gofundme__title">Help Us Open the Café Doors</h2>
+    <p class="gofundme__text">
+      Building the K'sserts Cookie Café — a real neighborhood home for community, coffee, and inclusive
+      dessert — is our next big step. Community support will help make it possible.
+    </p>
+
+    @if (goFundMeUrl) {
+      <a [href]="goFundMeUrl" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+        Support Our GoFundMe
+      </a>
+    } @else {
+      <p class="gofundme__placeholder">Our fundraising campaign is coming soon — check back for details.</p>
+    }
+  </div>
+</section>

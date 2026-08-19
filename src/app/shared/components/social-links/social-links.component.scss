@@ -1,0 +1,37 @@
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.social-links__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-on-dark);
+  color: inherit;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.social-links__link svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.social-links__link:hover {
+  background: rgba(253, 248, 240, 0.12);
+  border-color: currentColor;
+  transform: translateY(-2px);
+}
+
+.social-links--lg .social-links__link {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.social-links--lg .social-links__link svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}

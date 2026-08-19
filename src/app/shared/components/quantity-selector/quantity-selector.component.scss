@@ -1,0 +1,27 @@
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.qty__btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: background-color var(--transition-fast);
+}
+
+.qty__btn:not(:disabled):hover {
+  background: var(--color-tan-200);
+}
+
+.qty__value {
+  min-width: 2.25rem;
+  text-align: center;
+  font-weight: 600;
+}

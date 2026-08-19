@@ -1,0 +1,33 @@
+<section class="section featured" aria-labelledby="featured-heading">
+  <div class="container">
+    <header class="featured__header" appReveal>
+      <div>
+        <p class="eyebrow">Fresh From The Kitchen</p>
+        <h2 id="featured-heading" class="featured__title">Featured Treats</h2>
+      </div>
+      <a routerLink="/shop" class="btn btn--outline-dark">Shop All</a>
+    </header>
+
+    @if (loading()) {
+      <div class="featured__grid">
+        @for (i of skeletonCount; track $index) {
+          <app-product-card-skeleton />
+        }
+      </div>
+    } @else if (error()) {
+      <app-error-state
+        title="We couldn't load featured treats"
+        message="Please refresh the page, or visit the shop directly."
+        (retry)="load()"
+      />
+    } @else if (products().length === 0) {
+      <app-empty-state title="New treats are on the way" message="Check back soon, or visit the shop for what's available now." />
+    } @else {
+      <div class="featured__grid">
+        @for (product of products(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,62 @@
+.cafe__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.cafe__visual {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(155deg, var(--color-tan-300), var(--color-cocoa-700) 70%);
+}
+
+.cafe__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cafe__visual-texture {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(135deg, rgba(253, 248, 240, 0.08) 0 2px, transparent 2px 26px);
+}
+
+.cafe__title {
+  font-size: var(--fs-display-md);
+  margin-block: var(--space-xs) var(--space-md);
+}
+
+.cafe__text {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body-lg);
+  margin-bottom: var(--space-md);
+}
+
+.cafe__audiences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.cafe__audiences li {
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-tan-200);
+  color: var(--color-cocoa-800);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .cafe__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cafe__visual {
+    aspect-ratio: 16 / 10;
+  }
+}

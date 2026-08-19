@@ -1,0 +1,63 @@
+<header class="site-header" [class.site-header--scrolled]="isScrolled()" [class.site-header--menu-open]="mobileMenuOpen()">
+  <div class="site-header__bar container">
+    <a routerLink="/" class="site-header__logo" aria-label="K'sserts Cookie Café — Home">
+      <app-logo variant="full" theme="dark" [eager]="true" />
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      <ul>
+        @for (link of navLinks; track link.path) {
+          <li>
+            <a [routerLink]="link.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: link.path === '/' }">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <button type="button" class="site-header__cart-btn" (click)="openCart()" [attr.aria-label]="'Open cart, ' + cartService.totalQuantity() + ' items'">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          />
+          <path d="M9 8V6.5a3 3 0 1 1 6 0V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+        @if (cartService.totalQuantity() > 0) {
+          <span class="site-header__cart-count">{{ cartService.totalQuantity() }}</span>
+        }
+        <span class="visually-hidden">Cart</span>
+      </button>
+
+      <button
+        type="button"
+        class="site-header__menu-btn"
+        (click)="toggleMobileMenu()"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-controls="mobile-nav"
+        aria-label="Toggle menu"
+      >
+        <span class="site-header__menu-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-nav" class="site-header__mobile-nav" [class.is-open]="mobileMenuOpen()" [attr.aria-hidden]="!mobileMenuOpen()">
+    <nav aria-label="Mobile">
+      <ul>
+        @for (link of navLinks; track link.path) {
+          <li>
+            <a [routerLink]="link.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: link.path === '/' }" [tabIndex]="mobileMenuOpen() ? 0 : -1">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+    <a routerLink="/shop" class="btn btn--primary btn--block" [tabIndex]="mobileMenuOpen() ? 0 : -1">Shop K'sserts</a>
+  </div>
+</header>

@@ -1,0 +1,50 @@
+.mission {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--color-coral-700), var(--color-coral-600));
+  color: var(--color-cream-50);
+}
+
+.mission__cutout {
+  position: absolute;
+  z-index: 0;
+  top: -3rem;
+  right: -2rem;
+  width: 320px;
+  opacity: 0.9;
+  --cutout-rotate: 10deg;
+}
+
+@media (max-width: 900px) {
+  .mission__cutout {
+    width: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mission__cutout {
+    display: none;
+  }
+}
+
+.mission__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.mission .eyebrow {
+  color: var(--color-tan-200);
+}
+
+.mission__title {
+  font-size: var(--fs-display-lg);
+  margin-block: var(--space-sm) var(--space-md);
+}
+
+.mission__text {
+  font-size: var(--fs-body-lg);
+  color: rgba(253, 248, 240, 0.88);
+}

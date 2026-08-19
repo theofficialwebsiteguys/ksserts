@@ -1,0 +1,124 @@
+.meaning {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 85% 100%, var(--color-navy-700), var(--color-navy-950) 65%);
+  color: var(--color-text-on-dark);
+}
+
+.meaning__cutout {
+  position: absolute;
+  z-index: 0;
+  right: -1rem;
+  width: 260px;
+  opacity: 0.6;
+  --cutout-rotate: -7deg;
+}
+
+@media (max-width: 900px) {
+  .meaning__cutout {
+    display: none;
+  }
+}
+
+.meaning__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.meaning__mark {
+  position: relative;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Mirrors the heart's own violet-to-coral-to-blue sweep, softened into a glow.
+.meaning__mark::before {
+  content: '';
+  position: absolute;
+  inset: 6%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(120, 78, 228, 0.2),
+    rgba(228, 116, 120, 0.2) 45%,
+    rgba(112, 196, 234, 0.16) 72%,
+    transparent 86%
+  );
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.meaning__mark app-logo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  filter: drop-shadow(0 18px 32px rgba(20, 14, 15, 0.45));
+}
+
+.meaning__title {
+  font-size: var(--fs-display-md);
+  color: var(--color-white);
+  margin-block: var(--space-xs) var(--space-lg);
+}
+
+.meaning__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.meaning__item {
+  display: grid;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-on-dark);
+}
+
+.meaning__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.meaning__item dt {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  color: var(--color-tan-300);
+}
+
+// The heart's own coral-to-violet-to-blue sweep, left to right across the label.
+.meaning__item:last-child dt {
+  background: linear-gradient(90deg, var(--color-coral-500), var(--color-violet-500) 55%, var(--color-sky-500));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.meaning__item dd {
+  margin: 0;
+  color: var(--color-text-on-dark-muted);
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+  .meaning__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .meaning__mark {
+    height: 200px;
+  }
+}
+
+@media (max-width: 560px) {
+  .meaning__item {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xs);
+  }
+}

@@ -1,0 +1,26 @@
+<section class="section cafe" aria-labelledby="cafe-heading">
+  <div class="container cafe__inner">
+    <div class="cafe__visual" appReveal aria-hidden="true">
+      @if (visualImage(); as image) {
+        <img [src]="image.url" [alt]="''" loading="lazy" />
+      } @else {
+        <div class="cafe__visual-texture"></div>
+      }
+    </div>
+
+    <div class="cafe__content" appReveal>
+      <p class="eyebrow">Coming Soon</p>
+      <h2 id="cafe-heading" class="cafe__title text-balance">The K'sserts Cookie Café</h2>
+      <p class="cafe__text">
+        Our vision is a warm, welcoming neighborhood café where people gather over exceptional coffee,
+        handcrafted desserts, and meaningful conversation — a place where families celebrate milestones,
+        friends reconnect, students study, and neighbors feel at home.
+      </p>
+      <ul class="cafe__audiences">
+        @for (audience of audiences; track audience.label) {
+          <li>{{ audience.label }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
