@@ -10,18 +10,17 @@ const STORAGE_KEY = 'ksserts_cart_id';
 
 /**
  * Owns the Shopify cart lifecycle via the central commerce API.
- * Assumed contract (adjust here if the live API differs):
- *   POST   /{storeKey}/cart                         { lines: [{ variantId, quantity }] } -> Cart
- *   GET    /{storeKey}/cart/{cartId}                                                     -> Cart
- *   POST   /{storeKey}/cart/{cartId}/lines           { variantId, quantity }              -> Cart
- *   PATCH  /{storeKey}/cart/{cartId}/lines/{lineId}  { quantity }                         -> Cart
- *   DELETE /{storeKey}/cart/{cartId}/lines/{lineId}                                       -> Cart
+ *   POST   /api/v1/{storeKey}/cart                         { lines: [{ variantId, quantity }] } -> Cart
+ *   GET    /api/v1/{storeKey}/cart/{cartId}                                                     -> Cart
+ *   POST   /api/v1/{storeKey}/cart/{cartId}/lines           { variantId, quantity }              -> Cart
+ *   PATCH  /api/v1/{storeKey}/cart/{cartId}/lines/{lineId}  { quantity }                         -> Cart
+ *   DELETE /api/v1/{storeKey}/cart/{cartId}/lines/{lineId}                                       -> Cart
  */
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly http = inject(HttpClient);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly base = `${environment.commerceApiUrl}/${environment.storeKey}/cart`;
+  private readonly base = `${environment.commerceApiUrl}/api/v1/${environment.storeKey}/cart`;
 
   readonly cart = signal<Cart | null>(null);
   readonly loading = signal(false);

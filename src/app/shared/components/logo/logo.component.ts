@@ -47,7 +47,7 @@ export class LogoComponent {
 
   protected imgFailed = signal(false);
 
-  protected src = computed(() => '/assets/logo/logo-badge.png');
+  protected src = computed(() => 'assets/logo/logo-badge.png');
 
   constructor() {
     effect(() => {

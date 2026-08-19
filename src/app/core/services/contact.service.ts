@@ -7,14 +7,15 @@ import { ContactFormPayload } from '../models/contact.model';
 
 /**
  * Submits the contact form to the central API.
- * Assumed contract: POST /{storeKey}/contact  ->  204 No Content
- * This route may not be wired up on the backend yet — the Contact page
- * surfaces a real error in that case rather than pretending to succeed.
+ * Contract: POST /api/v1/{storeKey}/contact  ->  204 No Content
+ * This route is not wired up on the backend yet (app.js only mounts
+ * products/collections/cart) — the Contact page surfaces a real error
+ * in that case rather than pretending to succeed.
  */
 @Injectable({ providedIn: 'root' })
 export class ContactService {
   private readonly http = inject(HttpClient);
-  private readonly base = `${environment.commerceApiUrl}/${environment.storeKey}/contact`;
+  private readonly base = `${environment.commerceApiUrl}/api/v1/${environment.storeKey}/contact`;
 
   submit(payload: ContactFormPayload): Observable<void> {
     return this.http.post<void>(this.base, payload);

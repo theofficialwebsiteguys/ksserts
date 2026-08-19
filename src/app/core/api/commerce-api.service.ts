@@ -8,19 +8,17 @@ import { Product, ProductImage, ProductListResponse, ProductQueryParams } from '
 
 /**
  * Talks to the reusable central Shopify commerce API — never to Shopify directly.
- * All routes are scoped under {commerceApiUrl}/{storeKey}/...
+ * All routes are scoped under {commerceApiUrl}/api/v1/{storeKey}/...
  *
- * Assumed contract (adjust paths here if the live API differs — this is the
- * only file that should need to change):
- *   GET  /{storeKey}/products?search=&collection=&limit=&cursor=&availableOnly=
- *   GET  /{storeKey}/products/{handle}
- *   GET  /{storeKey}/collections
- *   GET  /{storeKey}/collections/{handle}?limit=
+ *   GET  /api/v1/{storeKey}/products?search=&collection=&limit=&cursor=&availableOnly=
+ *   GET  /api/v1/{storeKey}/products/{handle}
+ *   GET  /api/v1/{storeKey}/collections
+ *   GET  /api/v1/{storeKey}/collections/{handle}?limit=
  */
 @Injectable({ providedIn: 'root' })
 export class CommerceApiService {
   private readonly http = inject(HttpClient);
-  private readonly base = `${environment.commerceApiUrl}/${environment.storeKey}`;
+  private readonly base = `${environment.commerceApiUrl}/api/v1/${environment.storeKey}`;
 
   private productListCache$?: Observable<ProductListResponse>;
   private collectionsCache$?: Observable<Collection[]>;

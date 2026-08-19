@@ -2,7 +2,7 @@ import { Environment } from '../app/core/models/environment.model';
 
 export const environment: Environment = {
   production: false,
-  commerceApiUrl: 'http://localhost:3000/api/v1',
+  commerceApiUrl: 'http://localhost:3000',
   storeKey: 'ksserts',
   siteUrl: 'http://localhost:4200',
   goFundMeUrl: '',
