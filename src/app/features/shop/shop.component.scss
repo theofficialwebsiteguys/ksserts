@@ -2,13 +2,13 @@
   position: relative;
   overflow: hidden;
   // Short navy cap keeps the fixed header legible, same trick as the
-  // homepage hero, then opens into a bright, warm cream.
+  // homepage hero, then eases down into the page's near-black background.
   background: linear-gradient(
     180deg,
     var(--color-navy-900) 0,
     var(--color-navy-700) 70px,
-    var(--color-tan-300) 170px,
-    var(--color-cream-50) 340px
+    var(--color-bg-alt) 170px,
+    var(--color-bg) 340px
   );
   color: var(--color-text);
   padding-top: calc(var(--header-height) + var(--space-xl));
@@ -22,7 +22,7 @@
 
 .shop-hero__title {
   font-size: var(--fs-display-lg);
-  color: var(--color-navy-900);
+  color: var(--color-text);
   margin-block: var(--space-xs) var(--space-sm);
 }
 

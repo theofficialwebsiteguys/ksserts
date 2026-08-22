@@ -45,7 +45,7 @@
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--color-tan-200);
+  background: var(--color-surface);
 }
 
 .product-gallery__main img {
@@ -61,8 +61,8 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  color: var(--color-cocoa-700);
-  background: linear-gradient(135deg, var(--color-tan-200), var(--color-tan-300));
+  color: var(--color-text-muted);
+  background: linear-gradient(135deg, var(--color-noir-800), var(--color-noir-700));
 }
 
 .product-gallery__thumbs {
@@ -228,8 +228,31 @@
     flex-direction: column;
     align-items: stretch;
   }
+}
 
+@media (max-width: 640px) {
+  // Same horizontally-scrolling carousel treatment as the homepage's
+  // featured-products row.
   .product-related__grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: var(--space-md);
+    margin-inline: calc(var(--container-pad) * -1);
+    padding-inline: var(--container-pad);
+    padding-bottom: var(--space-2xs);
+  }
+
+  .product-related__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-related__grid > * {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
   }
 }

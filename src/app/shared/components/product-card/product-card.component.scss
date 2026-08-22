@@ -15,7 +15,7 @@
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-tan-200);
+  background: var(--color-surface);
 }
 
 .product-card__media img {
@@ -44,8 +44,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-tan-200), var(--color-tan-300));
-  color: var(--color-cocoa-700);
+  background: linear-gradient(135deg, var(--color-noir-800), var(--color-noir-700));
+  color: var(--color-text-muted);
   font-family: var(--font-display);
   font-size: 1.1rem;
 }
@@ -69,7 +69,7 @@
 }
 
 .product-card__sale-flag {
-  background: var(--color-brand-accent);
+  background: var(--color-coral-700);
   color: var(--color-cream-50);
 }
 

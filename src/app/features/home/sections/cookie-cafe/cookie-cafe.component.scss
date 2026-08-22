@@ -10,7 +10,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  background: linear-gradient(155deg, var(--color-tan-300), var(--color-cocoa-700) 70%);
+  background: linear-gradient(155deg, var(--color-cocoa-800), var(--color-noir-950) 70%);
 }
 
 .cafe__visual img {
@@ -45,8 +45,8 @@
 .cafe__audiences li {
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-pill);
-  background: var(--color-tan-200);
-  color: var(--color-cocoa-800);
+  background: var(--color-cream-100);
+  color: var(--color-cocoa-900);
   font-size: var(--fs-body-sm);
   font-weight: 500;
 }

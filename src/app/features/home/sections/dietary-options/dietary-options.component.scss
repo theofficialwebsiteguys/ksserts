@@ -86,7 +86,10 @@
   height: 3.5rem;
   border-radius: 50%;
   background: var(--color-coral-300);
-  color: var(--color-brand-accent);
+  // Explicit dark coral, not --color-brand-accent — that token is now the
+  // bright coral tuned for text-on-black and reads too low-contrast against
+  // this pale chip background.
+  color: var(--color-coral-700);
   margin-bottom: var(--space-sm);
 }
 

@@ -97,7 +97,10 @@
 }
 
 .btn--primary {
-  background: var(--color-brand-accent);
+  // Explicit coral-700 fill (not --color-brand-accent, which points at the
+  // brighter coral-500 tuned for text-on-black — too light for white text
+  // to stay AA-safe on top of it).
+  background: var(--color-coral-700);
   color: var(--color-cream-50);
   box-shadow: var(--shadow-sm);
 }
@@ -118,15 +121,18 @@
   border-color: var(--color-cream-50);
 }
 
+// Named for its original light-bg role (dark text/border); now that every
+// section is dark it's the general-purpose outline button — light border
+// and text, inverting to a solid light fill on hover.
 .btn--outline-dark {
   background: transparent;
-  border-color: var(--color-navy-700);
-  color: var(--color-navy-900);
+  border-color: var(--color-border);
+  color: var(--color-text);
 }
 
 .btn--outline-dark:not(:disabled):hover {
-  background: var(--color-navy-900);
-  color: var(--color-cream-50);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
 .btn--ghost {
@@ -216,7 +222,7 @@
 }
 
 .skeleton-block {
-  background: linear-gradient(90deg, var(--color-tan-200) 25%, var(--color-tan-300) 37%, var(--color-tan-200) 63%);
+  background: linear-gradient(90deg, var(--color-noir-800) 25%, var(--color-noir-700) 37%, var(--color-noir-800) 63%);
   background-size: 400% 100%;
   animation: skeleton-shimmer 1.6s ease-in-out infinite;
   border-radius: var(--radius-md);

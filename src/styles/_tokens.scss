@@ -3,8 +3,20 @@
 // coral, and violet; and diabetes-awareness ribbon blue as the site's main
 // brand color, per client direction — blue leads, coral (from the logo's
 // heart) is secondary, warm cocoa/cream stay as neutral ink/background only.
+//
+// Site-wide dark theme (client-requested, referencing Last Crumb's black
+// background treatment — black, dark brown, dark gray, not navy-tinted)
+// so product photography pops; navy/coral keep their original roles as
+// accent panels and CTA color rather than page background.
 
 :root {
+  // ---- Noir (dark-theme surface scale — page bg through raised cards) ----
+  --color-noir-950: #050403; // page background (near-black, deepest)
+  --color-noir-900: #120f0c; // alt section background — dark brown
+  --color-noir-800: #1d1815; // card / input / raised surface — dark brown
+  --color-noir-700: #2c2521; // borders, dividers, hover fills — dark warm gray
+  --color-noir-600: #423a34; // muted borders, disabled state — warm gray
+
   // ---- Navy (main brand color — diabetes-awareness ribbon blue) ----------
   --color-navy-950: #14324a; // deepest band bg (footer)
   --color-navy-900: #1b4b72; // header / hero / dark section bg — ribbon cap navy
@@ -47,17 +59,25 @@
   --color-ink: var(--color-cocoa-950);
 
   // ---- Semantic tokens -----------------------------------------------------
-  --color-bg: var(--color-cream-50);
-  --color-bg-alt: var(--color-tan-200);
-  --color-surface: var(--color-white);
+  --color-bg: var(--color-noir-950);
+  --color-bg-alt: var(--color-noir-900);
+  --color-surface: var(--color-noir-800);
   --color-surface-dark: var(--color-navy-900);
-  --color-text: var(--color-ink);
-  --color-text-muted: #7d6e68;
-  --color-text-on-dark: var(--color-cream-100);
-  --color-text-on-dark-muted: #d6c6bb;
+  // Pure white, not cream — client asked for "black background with big
+  // white text" (higher-contrast, bolder than the site's original cream
+  // ink-on-cream pairing).
+  --color-text: var(--color-white);
+  --color-text-muted: #e0d3c8;
+  --color-text-on-dark: var(--color-white);
+  --color-text-on-dark-muted: #e0d3c8;
 
   --color-brand-primary: var(--color-navy-900);
-  --color-brand-accent: var(--color-coral-700);
+  // Brand-accent now doubles as body-text foreground against the near-black
+  // bg, so it points at the brighter sampled coral (coral-700 was darkened
+  // for AA specifically against a light background and reads muddy on
+  // black — coral-700 is kept for solid fills that carry white/cream text,
+  // e.g. .btn--primary, referenced directly where that's needed).
+  --color-brand-accent: var(--color-coral-500);
   --color-brand-accent-hover: var(--color-coral-600);
 
   --color-accent-sky: var(--color-sky-500);
@@ -67,11 +87,11 @@
   --color-accent-violet-deep: var(--color-violet-700);
   --color-accent-violet-pale: var(--color-violet-100);
 
-  --color-border: rgba(51, 43, 45, 0.14);
-  --color-border-on-dark: rgba(253, 250, 247, 0.16);
+  --color-border: rgba(253, 248, 240, 0.16);
+  --color-border-on-dark: rgba(253, 248, 240, 0.16);
 
-  --color-success: #3f7d54;
-  --color-danger: var(--color-coral-700);
+  --color-success: #5fbf82;
+  --color-danger: var(--color-coral-500);
 
   // ---- Typography ---------------------------------------------------------
   // Caveat echoes the logo's own hand-brushed "K'sserts" lettering — sized up
@@ -80,14 +100,16 @@
   --font-display: 'Caveat', 'Segoe UI', cursive;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --fs-display-xl: clamp(3.5rem, 2.5rem + 4vw, 6.25rem);
-  --fs-display-lg: clamp(2.85rem, 2.1rem + 3vw, 4.75rem);
-  --fs-display-md: clamp(2.2rem, 1.7rem + 2vw, 3.5rem);
-  --fs-display-sm: clamp(1.75rem, 1.5rem + 1vw, 2.35rem);
-  --fs-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
-  --fs-body-md: 1rem;
-  --fs-body-sm: 0.875rem;
-  --fs-eyebrow: 0.8125rem;
+  // Bumped up from the original scale — client asked for larger type overall
+  // on the new dark background.
+  --fs-display-xl: clamp(4rem, 2.8rem + 4.6vw, 7.25rem);
+  --fs-display-lg: clamp(3.25rem, 2.35rem + 3.6vw, 5.5rem);
+  --fs-display-md: clamp(2.5rem, 1.9rem + 2.4vw, 4.1rem);
+  --fs-display-sm: clamp(2rem, 1.7rem + 1.2vw, 2.75rem);
+  --fs-body-lg: clamp(1.15rem, 1.05rem + 0.35vw, 1.4rem);
+  --fs-body-md: 1.0625rem;
+  --fs-body-sm: 0.9375rem;
+  --fs-eyebrow: 0.875rem;
 
   // ---- Spacing scale --------------------------------------------------------
   --space-3xs: 0.25rem;

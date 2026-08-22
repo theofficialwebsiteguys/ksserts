@@ -21,7 +21,7 @@
   right: 0;
   height: 100dvh;
   width: min(100%, 420px);
-  background: var(--color-cream-50);
+  background: var(--color-bg);
   color: var(--color-text);
   z-index: 201;
   display: flex;
@@ -58,7 +58,7 @@
 }
 
 .cart-drawer__close:hover {
-  background: var(--color-tan-200);
+  background: rgba(253, 248, 240, 0.12);
 }
 
 .cart-drawer__close svg {
@@ -122,11 +122,11 @@
   border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
-  background: var(--color-tan-200);
+  background: var(--color-surface);
 }
 
 .cart-line__image--placeholder {
-  background: linear-gradient(135deg, var(--color-tan-200), var(--color-tan-300));
+  background: linear-gradient(135deg, var(--color-noir-800), var(--color-noir-700));
 }
 
 .cart-line__details {

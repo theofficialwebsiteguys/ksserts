@@ -4,11 +4,11 @@ export type LogoVariant = 'full' | 'mark';
 export type LogoTheme = 'light' | 'dark';
 
 /**
- * Renders the K'sserts logo — a single circular badge (wordmark + piping-bag
- * mark + tagline ring) with its own cream backing baked in, so it reads
- * cleanly on both light and dark section backgrounds without needing
- * separate reversed art. Falls back to a styled wordmark if the real file
- * is ever missing, so the site never shows a broken image icon.
+ * Renders the K'sserts logo — wordmark + piping-bag mark + tagline ring,
+ * on its own near-black backing (client-supplied art, matches the site's
+ * dark theme so it sits flush against dark section backgrounds without a
+ * visible box/circle around it). Falls back to a styled wordmark if the
+ * real file is ever missing, so the site never shows a broken image icon.
  *
  * `variant`/`theme` are kept as inputs (harmlessly unused against the single
  * current asset) so a future horizontal lockup or icon-only mark can be
@@ -47,7 +47,7 @@ export class LogoComponent {
 
   protected imgFailed = signal(false);
 
-  protected src = computed(() => 'assets/logo/logo-badge.png');
+  protected src = computed(() => 'assets/logo/dark-logo.png');
 
   constructor() {
     effect(() => {
