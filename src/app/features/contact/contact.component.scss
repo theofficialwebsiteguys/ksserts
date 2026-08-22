@@ -1,13 +1,7 @@
 .contact-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    var(--color-navy-900) 0,
-    var(--color-navy-700) 70px,
-    var(--color-bg-alt) 190px,
-    var(--color-bg) 380px
-  );
+  background: var(--color-bg);
   color: var(--color-text);
   padding-top: calc(var(--header-height) + var(--space-2xl));
   padding-bottom: var(--space-2xl);

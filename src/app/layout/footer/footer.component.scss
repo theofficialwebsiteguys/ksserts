@@ -1,7 +1,8 @@
 .site-footer {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, var(--color-navy-700), var(--color-navy-950) 65%);
+  background: var(--color-bg-alt);
+  border-top: 3px solid var(--color-coral-700);
   color: var(--color-text-on-dark);
   padding-top: var(--space-2xl);
 }

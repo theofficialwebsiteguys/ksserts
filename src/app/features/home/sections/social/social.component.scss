@@ -1,7 +1,7 @@
 .social {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(120deg, var(--color-navy-700), var(--color-navy-900) 70%);
+  background: radial-gradient(circle at 15% 20%, rgba(45, 111, 156, 0.28), var(--color-bg) 65%);
   color: var(--color-text-on-dark);
 }
 

@@ -1,16 +1,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  // A short navy cap at the very top keeps the fixed header's logo/nav
-  // legible (it overlays transparently here, same as every other page),
-  // then eases down into the page's own near-black background.
-  background: linear-gradient(
-    180deg,
-    var(--color-navy-900) 0,
-    var(--color-navy-700) 88px,
-    var(--color-bg-alt) 230px,
-    var(--color-bg) 480px
-  );
+  background: var(--color-bg);
   color: var(--color-text);
   padding-top: calc(var(--header-height) + var(--space-md));
   padding-bottom: var(--space-md);

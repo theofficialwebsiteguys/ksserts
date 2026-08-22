@@ -1,8 +1,10 @@
 .mission {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--color-coral-700), var(--color-coral-600));
-  color: var(--color-cream-50);
+  background: radial-gradient(circle at 50% 0%, rgba(196, 60, 66, 0.3), var(--color-bg) 70%);
+  border-top: 3px solid var(--color-coral-700);
+  border-bottom: 3px solid var(--color-coral-700);
+  color: var(--color-text);
 }
 
 .mission__cutout {
@@ -35,10 +37,6 @@
   text-align: center;
 }
 
-.mission .eyebrow {
-  color: var(--color-tan-200);
-}
-
 .mission__title {
   font-size: var(--fs-display-lg);
   margin-block: var(--space-sm) var(--space-md);
@@ -46,5 +44,5 @@
 
 .mission__text {
   font-size: var(--fs-body-lg);
-  color: rgba(253, 248, 240, 0.88);
+  color: var(--color-text-muted);
 }

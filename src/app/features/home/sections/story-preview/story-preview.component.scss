@@ -45,8 +45,9 @@
 }
 
 .story-preview__quote {
-  background: linear-gradient(150deg, var(--color-navy-700), var(--color-navy-900));
-  color: var(--color-cream-50);
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-coral-700);
+  color: var(--color-text);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   position: relative;
@@ -60,7 +61,7 @@
 }
 
 .story-preview__quote-attribution {
-  color: var(--color-tan-300);
+  color: var(--color-brand-accent);
   font-size: var(--fs-body-sm);
 }
 
