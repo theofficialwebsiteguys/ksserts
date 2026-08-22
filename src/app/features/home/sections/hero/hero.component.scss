@@ -3,8 +3,8 @@
   overflow: hidden;
   background: var(--color-bg);
   color: var(--color-text);
-  padding-top: calc(var(--header-height) + var(--space-md));
-  padding-bottom: var(--space-md);
+  padding-top: calc(var(--header-height) + var(--space-xl));
+  padding-bottom: var(--space-2xl);
 }
 
 .hero__texture {
@@ -16,61 +16,24 @@
   pointer-events: none;
 }
 
-.hero__glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  pointer-events: none;
-}
-
-.hero__glow--coral {
-  width: 26rem;
-  height: 26rem;
-  background: rgba(228, 116, 120, 0.28);
-  top: 2rem;
-  right: -6rem;
-}
-
-.hero__glow--sky {
-  width: 20rem;
-  height: 20rem;
-  background: rgba(112, 196, 234, 0.22);
-  bottom: -8rem;
-  left: -4rem;
-}
-
-.hero__glow--violet {
-  width: 14rem;
-  height: 14rem;
-  background: rgba(120, 78, 228, 0.12);
-  top: 45%;
-  left: 8%;
-}
-
-// Playful dessert cutouts, scattered in the side margins so they never sit
-// behind the headline. Positioned from the hero's own edges (not percentages
-// of its height) so they hold their spot regardless of how tall the content
-// makes the section. Hidden below tablet width — not enough margin to place
-// them without covering text once the content column goes full-width.
-.hero__cutouts {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
+// Two big, intentionally-placed photos bleeding off the hero's own edges —
+// same treatment as the dietary-options section below it — rather than a
+// scatter of small floating cutouts. Sit behind the text column (z-index:0
+// vs .hero__inner's 1) so they can peek in at the column's edges instead of
+// being confined to the margins.
 .hero__cutout {
   position: absolute;
-  width: var(--cutout-size, 120px);
+  z-index: 0;
   opacity: 0;
-  filter: drop-shadow(0 12px 20px rgba(8, 16, 24, 0.35));
-  animation: hero-cutout-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) var(--cutout-delay, 0s) forwards;
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.5));
+  animation: hero-cutout-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) var(--cutout-delay, 0s) forwards;
+  pointer-events: none;
 }
 
 @keyframes hero-cutout-in {
   from {
     opacity: 0;
-    transform: scale(0.5) rotate(var(--cutout-rotate, 0deg));
+    transform: scale(0.6) rotate(var(--cutout-rotate, 0deg));
   }
   to {
     opacity: 1;
@@ -79,62 +42,50 @@
 }
 
 .hero__cutout--1 {
-  --cutout-size: 200px;
-  --cutout-rotate: -13deg;
+  width: 480px;
+  bottom: -3rem;
+  left: -3%;
+  --cutout-rotate: -8deg;
   --cutout-delay: 0.15s;
-  top: 5.5rem;
-  left: 9%;
 }
 
 .hero__cutout--2 {
-  --cutout-size: 165px;
-  --cutout-rotate: 9deg;
-  --cutout-delay: 0.35s;
-  top: 8rem;
-  right: 8%;
-}
-
-.hero__cutout--3 {
-  --cutout-size: 178px;
+  width: 400px;
+  top: -1.5rem;
+  right: -2%;
   --cutout-rotate: 7deg;
-  --cutout-delay: 0.55s;
-  top: 24rem;
-  left: 13%;
+  --cutout-delay: 0.35s;
 }
 
-.hero__cutout--4 {
-  --cutout-size: 158px;
-  --cutout-rotate: -10deg;
-  --cutout-delay: 0.7s;
-  bottom: 10.5rem;
-  right: 12%;
-}
-
-@media (max-width: 1199px) {
-  .hero__cutout--3,
-  .hero__cutout--4 {
-    display: none;
-  }
-
+@media (max-width: 1300px) {
   .hero__cutout--1 {
-    --cutout-size: 140px;
-    left: 4%;
+    width: 360px;
   }
 
   .hero__cutout--2 {
-    --cutout-size: 120px;
-    right: 4%;
+    width: 300px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero__cutout--1 {
+    width: 280px;
+  }
+
+  .hero__cutout--2 {
+    width: 220px;
   }
 }
 
 @media (max-width: 899px) {
-  .hero__cutouts {
+  .hero__cutout {
     display: none;
   }
 }
 
 .hero__inner {
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,71 +129,19 @@
   gap: var(--space-sm);
 }
 
-// Normal document flow (not absolutely positioned) so it's always part of
-// the hero's actual height and visible on landing, instead of depending on
-// exactly how tall the viewport happens to be.
-.hero__marquee {
-  position: relative;
-  margin-top: var(--space-md);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
-}
-
-.hero__marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: max-content;
-  animation: hero-marquee 46s linear infinite;
-}
-
-.hero__marquee-track img {
-  height: 170px;
-  width: 170px;
-  flex-shrink: 0;
-  border-radius: var(--radius-md);
-  object-fit: cover;
-  // box-shadow: 0 14px 28px rgba(8, 16, 24, 0.45);
-}
-
-@keyframes hero-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @media (max-width: 640px) {
   .hero {
-    padding-top: calc(var(--header-height) + var(--space-sm));
-    padding-bottom: var(--space-sm);
+    padding-top: calc(var(--header-height) + var(--space-lg));
+    padding-bottom: var(--space-lg);
   }
 
   .hero__logo-wrap {
     height: 76px;
-  }
-
-  .hero__marquee {
-    margin-top: var(--space-sm);
-  }
-
-  .hero__marquee-track img {
-    height: 76px;
-    width: 76px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero__logo-wrap {
-    animation: none;
-  }
-
-  .hero__marquee-track {
     animation: none;
   }
 
