@@ -43,8 +43,22 @@
 }
 
 @media (max-width: 900px) {
-  .shop-hero__cutout {
-    display: none;
+  .shop-hero__cutout--top {
+    width: 170px;
+  }
+
+  .shop-hero__cutout--corner {
+    width: 130px;
+  }
+}
+
+@media (max-width: 560px) {
+  .shop-hero__cutout--top {
+    width: 120px;
+  }
+
+  .shop-hero__cutout--corner {
+    width: 100px;
   }
 }
 

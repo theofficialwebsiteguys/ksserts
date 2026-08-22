@@ -32,7 +32,13 @@
 
 @media (max-width: 900px) {
   .site-footer__cutout {
-    display: none;
+    width: 150px;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-footer__cutout {
+    width: 110px;
   }
 }
 

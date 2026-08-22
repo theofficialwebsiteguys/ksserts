@@ -78,8 +78,26 @@
 }
 
 @media (max-width: 899px) {
-  .hero__cutout {
-    display: none;
+  .hero__cutout--1 {
+    width: 190px;
+    // Sits lower than the desktop bleed so it clears the subtext paragraph
+    // and only grazes the (opaque) CTA row.
+    bottom: -5rem;
+  }
+
+  .hero__cutout--2 {
+    width: 160px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__cutout--1 {
+    width: 150px;
+    bottom: -4.5rem;
+  }
+
+  .hero__cutout--2 {
+    width: 130px;
   }
 }
 

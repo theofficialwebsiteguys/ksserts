@@ -32,8 +32,16 @@
 }
 
 @media (max-width: 640px) {
-  .dietary__cutout {
-    display: none;
+  // Moved off the top corner (where it overlapped the centered eyebrow/
+  // title text at full-width) down to the bottom, mirroring cutout--2.
+  .dietary__cutout--1 {
+    width: 130px;
+    top: auto;
+    bottom: -1rem;
+  }
+
+  .dietary__cutout--2 {
+    width: 130px;
   }
 }
 

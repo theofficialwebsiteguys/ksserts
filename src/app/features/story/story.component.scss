@@ -46,8 +46,22 @@
 }
 
 @media (max-width: 900px) {
-  .story-hero__cutout {
-    display: none;
+  .story-hero__cutout--edge {
+    width: 140px;
+  }
+
+  .story-hero__cutout--corner {
+    width: 150px;
+  }
+}
+
+@media (max-width: 560px) {
+  .story-hero__cutout--edge {
+    width: 100px;
+  }
+
+  .story-hero__cutout--corner {
+    width: 110px;
   }
 }
 

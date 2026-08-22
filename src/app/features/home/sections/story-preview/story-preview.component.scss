@@ -20,7 +20,13 @@
 
 @media (max-width: 1100px) {
   .story-preview__cutout {
-    display: none;
+    width: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-preview__cutout {
+    width: 110px;
   }
 }
 

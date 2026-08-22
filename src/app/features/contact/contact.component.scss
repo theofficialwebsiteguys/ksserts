@@ -30,6 +30,7 @@
 }
 
 .contact-hero__cutout--1 {
+  top: -1.5rem;
   right: 2%;
   width: 250px;
   --cutout-rotate: 9deg;
@@ -42,8 +43,22 @@
 }
 
 @media (max-width: 900px) {
-  .contact-hero__cutout {
-    display: none;
+  .contact-hero__cutout--1 {
+    width: 150px;
+  }
+
+  .contact-hero__cutout--2 {
+    width: 110px;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-hero__cutout--1 {
+    width: 110px;
+  }
+
+  .contact-hero__cutout--2 {
+    width: 90px;
   }
 }
 
