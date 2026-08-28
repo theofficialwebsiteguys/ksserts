@@ -1,13 +1,12 @@
 // K'sserts Cookie Café design tokens
-// Two sources: the logo artwork (public/assets/logo/) for wordmark ink,
-// coral, and violet; and diabetes-awareness ribbon blue as the site's main
-// brand color, per client direction — blue leads, coral (from the logo's
-// heart) is secondary, warm cocoa/cream stay as neutral ink/background only.
+// Coral and sky are resampled directly from the current logo lockup
+// (public/assets/logo/logo-lockup.png) — a flat red heart/piping-bag and a
+// blue "G", no gradient. Warm cocoa/cream stay as neutral ink/background only.
 //
 // Site-wide dark theme (client-requested, referencing Last Crumb's black
 // background treatment — black, dark brown, dark gray, not navy-tinted)
-// so product photography pops; navy/coral keep their original roles as
-// accent panels and CTA color rather than page background.
+// so product photography pops; coral/sky are accent-only, never a
+// background fill.
 
 :root {
   // ---- Noir (dark-theme surface scale — page bg through raised cards) ----
@@ -17,12 +16,14 @@
   --color-noir-700: #2c2521; // borders, dividers, hover fills — dark warm gray
   --color-noir-600: #423a34; // muted borders, disabled state — warm gray
 
-  // ---- Navy (main brand color — diabetes-awareness ribbon blue) ----------
-  --color-navy-950: #14324a; // deepest band bg (footer)
-  --color-navy-900: #1b4b72; // header / hero / dark section bg — ribbon cap navy
+  // ---- Navy — unused: no component references these. Left over from a
+  // pre-dark-theme design where navy was the page background; the current
+  // logo's blue lives in the sky-* tokens below instead.
+  --color-navy-950: #14324a;
+  --color-navy-900: #1b4b72;
   --color-navy-700: #2d6f9c;
-  --color-navy-600: #3e89b7; // ribbon body / "Diabetes" script blue
-  --color-navy-400: #7bb8da; // light tint for accents/hover on dark bg
+  --color-navy-600: #3e89b7;
+  --color-navy-400: #7bb8da;
 
   // ---- Cocoa (logo wordmark ink — text only, not a brand surface color) --
   --color-cocoa-950: #332b2d;
@@ -32,12 +33,17 @@
   --color-cocoa-600: #8a7c7f;
   --color-cocoa-400: #ab9fa1;
 
-  // ---- Coral (secondary — logo heart, close to the ribbon's pink) --------
-  --color-coral-800: #a5333a;
-  --color-coral-700: #c43c42; // accessible accent (buttons/links) — darkened from sampled coral for AA contrast
-  --color-coral-600: #d4585e;
-  --color-coral-500: #e47478; // <- exact sampled heart/G coral
-  --color-coral-300: #f0aeb0;
+  // ---- Coral (secondary — logo heart/piping-bag red) ---------------------
+  // Resampled from the current logo lockup (public/assets/logo/logo-lockup.png),
+  // a flat, vivid red — no gradient like the earlier mark. 700 is the exact
+  // sampled value (AA-safe with white text at 4.71:1); 500 is a brighter same-hue
+  // tint tuned for AA against the near-black page bg (4.77:1) instead of coral-700,
+  // which reads slightly muddy there.
+  --color-coral-800: #9e0c26;
+  --color-coral-700: #e0102f; // <- exact sampled heart/piping-bag red
+  --color-coral-600: #db102e; // hover state for solid fills
+  --color-coral-500: #ef1b3a; // accessible accent on dark bg (text/icons/links)
+  --color-coral-300: #f9c3cb;
 
   --color-cream-50: #fdfaf7;
   --color-cream-100: #f7ede4;
@@ -45,13 +51,18 @@
   --color-tan-300: #e4d8cc; // <- exact sampled deeper badge cream
   --color-tan-400: #cbb49c;
 
-  --color-sky-700: #3f8fb8; // darkened, accessible on light bg (text/icons)
-  --color-sky-500: #70c4ea; // <- exact sampled piping-bag blue
-  --color-sky-100: #d1effb; // <- exact sampled pale bag fill
+  // Resampled from the current logo lockup's "G" — a vivid, fully-saturated
+  // blue (no longer the muted ribbon-navy the original palette assumed).
+  --color-sky-700: #0074c2; // darkened, accessible on light/pale bg (text/icons)
+  --color-sky-500: #0078c8; // <- exact sampled "G" blue
+  --color-sky-100: #cdeaff;
 
-  --color-violet-700: #6a3fc0; // darkened, accessible on light bg (text/icons)
-  --color-violet-500: #784ee4; // <- exact sampled gradient tip on the heart
-  --color-violet-100: #ece3fb; // pale tint, mirrors sky-100/coral-300 treatment
+  // Unused: the current logo is a flat two-tone (red heart/bag + blue "G"),
+  // no violet gradient stop like the earlier mark. Kept defined in case a
+  // future lockup brings a third hue back; nothing currently references these.
+  --color-violet-700: #6a3fc0;
+  --color-violet-500: #784ee4;
+  --color-violet-100: #ece3fb;
 
   --color-accent-gold: #c98a3e; // focus-ring only — chosen for contrast against both light and dark sections
 

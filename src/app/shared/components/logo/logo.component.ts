@@ -1,6 +1,6 @@
 import { Component, computed, effect, input, signal } from '@angular/core';
 
-export type LogoVariant = 'full' | 'mark';
+export type LogoVariant = 'full' | 'mark' | 'lockup';
 export type LogoTheme = 'light' | 'dark';
 
 /**
@@ -10,9 +10,10 @@ export type LogoTheme = 'light' | 'dark';
  * visible box/circle around it). Falls back to a styled wordmark if the
  * real file is ever missing, so the site never shows a broken image icon.
  *
- * `variant`/`theme` are kept as inputs (harmlessly unused against the single
- * current asset) so a future horizontal lockup or icon-only mark can be
- * wired in per placement without touching call sites.
+ * `full`/`mark` share the compact asset (wordmark + ring text, no "Cookie
+ * Café"/tagline) — legible even at header/footer sizes. `lockup` is the
+ * larger brand lockup with "Cookie Café" and the tagline baked in, for
+ * placements big enough to render that detail (the hero).
  */
 @Component({
   selector: 'app-logo',
@@ -47,7 +48,7 @@ export class LogoComponent {
 
   protected imgFailed = signal(false);
 
-  protected src = computed(() => 'assets/logo/dark-logo.png');
+  protected src = computed(() => (this.variant() === 'lockup' ? 'assets/logo/logo-lockup.png' : 'assets/logo/logo-lockup-small.png'));
 
   constructor() {
     effect(() => {

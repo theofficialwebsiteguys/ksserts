@@ -39,20 +39,14 @@
   justify-content: center;
 }
 
-// Mirrors the heart's own violet-to-coral-to-blue sweep, softened into a glow.
+// Mirrors the logo's own red-to-blue two-tone, softened into a glow.
 .meaning__mark::before {
   content: '';
   position: absolute;
   inset: 6%;
   z-index: 0;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(120, 78, 228, 0.2),
-    rgba(228, 116, 120, 0.2) 45%,
-    rgba(112, 196, 234, 0.16) 72%,
-    transparent 86%
-  );
+  background: radial-gradient(circle, rgba(224, 16, 47, 0.22), rgba(0, 120, 200, 0.16) 65%, transparent 86%);
   filter: blur(28px);
   pointer-events: none;
 }
@@ -94,9 +88,9 @@
   color: var(--color-tan-300);
 }
 
-// The heart's own coral-to-violet-to-blue sweep, left to right across the label.
+// The logo's own red-to-blue two-tone, left to right across the label.
 .meaning__item:last-child dt {
-  background: linear-gradient(90deg, var(--color-coral-500), var(--color-violet-500) 55%, var(--color-sky-500));
+  background: linear-gradient(90deg, var(--color-coral-500), var(--color-sky-500));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

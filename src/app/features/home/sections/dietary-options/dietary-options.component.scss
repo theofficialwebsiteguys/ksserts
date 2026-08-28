@@ -101,16 +101,12 @@
   margin-bottom: var(--space-sm);
 }
 
-// Cycles through the heart's own gradient hues (coral → sky → violet)
-// across the four cards — a subtle, tasteful nod, not a loud rainbow.
-.dietary-card:nth-child(2) .dietary-card__icon {
+// Alternates the logo's own two hues (red heart/bag, blue "G") across the
+// four cards — a subtle, tasteful nod, not a loud rainbow.
+.dietary-card:nth-child(2) .dietary-card__icon,
+.dietary-card:nth-child(4) .dietary-card__icon {
   background: var(--color-accent-sky-pale);
   color: var(--color-accent-sky-deep);
-}
-
-.dietary-card:nth-child(3) .dietary-card__icon {
-  background: var(--color-accent-violet-pale);
-  color: var(--color-accent-violet-deep);
 }
 
 .dietary-card__icon svg {

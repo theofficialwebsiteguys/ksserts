@@ -113,8 +113,13 @@
   margin-inline: auto;
 }
 
+// The full brand lockup (wordmark + "Cookie Café" + tagline baked in) is the
+// hero's dominant element per client direction — sized well above the other
+// app-logo placements (header/footer/meaning all stay compact). clamp()
+// instead of breakpoints since it scales continuously and the 1.5:1 image
+// ratio keeps its rendered width safely inside .hero__inner at every size.
 .hero__logo-wrap {
-  height: 88px;
+  height: clamp(170px, 30vw, 320px);
   animation: hero-float 7s ease-in-out infinite;
 }
 
@@ -151,10 +156,6 @@
   .hero {
     padding-top: calc(var(--header-height) + var(--space-lg));
     padding-bottom: var(--space-lg);
-  }
-
-  .hero__logo-wrap {
-    height: 76px;
   }
 }
 
