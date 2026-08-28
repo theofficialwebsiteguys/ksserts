@@ -101,17 +101,22 @@
   margin-bottom: var(--space-sm);
 }
 
-// Alternates the logo's own two hues (red heart/bag, blue "G") across the
-// four cards — a subtle, tasteful nod, not a loud rainbow.
-.dietary-card:nth-child(2) .dietary-card__icon,
-.dietary-card:nth-child(4) .dietary-card__icon {
-  background: var(--color-accent-sky-pale);
-  color: var(--color-accent-sky-deep);
+// Real badge art (gluten-free/vegan/diabetic-friendly) is already
+// full-color, so it sits on a neutral chip instead of the coral tint used
+// for the one remaining hand-drawn icon (Specialty Desserts).
+.dietary-card__icon--logo {
+  background: var(--color-cream-50);
 }
 
 .dietary-card__icon svg {
   width: 1.75rem;
   height: 1.75rem;
+}
+
+.dietary-card__logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
 }
 
 .dietary-card__title {

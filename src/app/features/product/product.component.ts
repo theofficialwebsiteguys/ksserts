@@ -41,6 +41,7 @@ export class ProductComponent implements OnDestroy {
   protected relatedProducts = signal<Product[]>([]);
 
   protected dietaryBadges = computed(() => (this.product() ? getDietaryBadges(this.product()!) : []));
+  protected isGlutenFree = computed(() => this.dietaryBadges().some((badge) => badge.key === 'gluten-free'));
 
   protected selectedVariant = computed(() => {
     const product = this.product();

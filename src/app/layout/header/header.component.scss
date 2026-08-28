@@ -1,19 +1,19 @@
-// Classic always-solid navigation bar (not a fade-in-on-scroll overlay) —
-// matches the logo art's own near-black backing so it sits flush with no
-// visible box around it. A single coral accent line marks the top edge;
-// navy/coral stay accent-only elsewhere, never a background fill.
+// Transparent over whatever section sits at the top of the page (every
+// page's top section already pads its content below --header-height, so
+// its own dark bg/imagery shows through here) until scrolled, then solid.
 .site-header {
   position: fixed;
   inset-inline: 0;
   top: 0;
   z-index: 100;
-  background: var(--color-bg);
+  background: transparent;
   border-top: 3px solid var(--color-coral-700);
-  transition: box-shadow var(--transition-base);
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .site-header--scrolled,
 .site-header--menu-open {
+  background: var(--color-bg);
   box-shadow: var(--shadow-sm);
 }
 

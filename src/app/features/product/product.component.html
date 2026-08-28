@@ -91,7 +91,7 @@
           </button>
         </div>
 
-        @if (ingredientFields().length || allergenFields().length) {
+        @if (ingredientFields().length || allergenFields().length || isGlutenFree()) {
           <div class="product-info__meta">
             @if (ingredientFields().length) {
               <div class="product-info__meta-block">
@@ -107,6 +107,18 @@
                 @for (field of allergenFields(); track field.key) {
                   <p>{{ field.value }}</p>
                 }
+              </div>
+            }
+            @if (isGlutenFree()) {
+              <div class="product-info__meta-block">
+                <h2>Gluten-Free Disclaimer</h2>
+                <p>
+                  K'sserts is not a certified gluten-free facility. Our gluten-free items are made with
+                  gluten-free ingredients; however, they are prepared in a shared commercial kitchen where wheat
+                  and other gluten-containing ingredients are also handled. While we take extreme precautions to
+                  minimize cross-contact, we cannot guarantee that our products are completely free from trace
+                  amounts of gluten.
+                </p>
               </div>
             }
           </div>

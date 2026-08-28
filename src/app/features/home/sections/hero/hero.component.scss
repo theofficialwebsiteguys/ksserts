@@ -44,22 +44,22 @@
 .hero__cutout--1 {
   width: 480px;
   bottom: -3rem;
-  left: -3%;
+  left: 7%;
   --cutout-rotate: -8deg;
   --cutout-delay: 0.15s;
 }
 
 .hero__cutout--2 {
   width: 400px;
-  top: -1.5rem;
+  top: 3rem;
   right: -2%;
   --cutout-rotate: 7deg;
   --cutout-delay: 0.35s;
 }
 
-// Near the headline, top-left — the biggest of the three per client direction.
+// Near the headline, top-left.
 .hero__cutout--3 {
-  width: 440px;
+  width: 360px;
   top: -2rem;
   left: -2%;
   --cutout-rotate: -6deg;
@@ -76,7 +76,7 @@
   }
 
   .hero__cutout--3 {
-    width: 330px;
+    width: 280px;
   }
 }
 
@@ -90,7 +90,7 @@
   }
 
   .hero__cutout--3 {
-    width: 250px;
+    width: 210px;
   }
 }
 
@@ -108,35 +108,42 @@
     justify-content: center;
   }
 
+  // Sits close behind the CTA row rather than bleeding far below it — the
+  // (opaque) buttons safely mask the overlap.
   .hero__cutout--1 {
-    width: 190px;
-    // Sits lower than the desktop bleed so it clears the subtext paragraph
-    // and only grazes the (opaque) CTA row.
-    bottom: -5rem;
+    // width: 190px;
+    bottom: -2.5rem;
   }
 
   // Stays prominent at mobile widths instead of shrinking away — this is
   // the one meant to read clearly at a glance per client direction.
   .hero__cutout--2 {
     width: 280px;
+    right: -20%;
   }
 
-  // The centered headline/logo leave no safe width for a large image at the
-  // top on narrow viewports, so cutout--3 moves to the opposite bottom
-  // corner from cutout--1 instead of fighting the text at top-left.
+  // Stays top-left like desktop, just small enough to clear the centered
+  // headline/logo at this width instead of fighting the text.
   .hero__cutout--3 {
-    width: 180px;
-    top: auto;
-    left: auto;
-    bottom: -6.5rem;
-    right: -2%;
+    width: 110px;
+    top: -0.5rem;
+    left: -2%;
+  }
+
+  .hero__headline {
+    font-size: clamp(2.1rem, 1.5rem + 3vw, 2.75rem);
+  }
+
+  .hero__subtext {
+    font-size: var(--fs-body-sm);
+    max-width: 300px;
   }
 }
 
 @media (max-width: 560px) {
   .hero__cutout--1 {
-    width: 150px;
-    bottom: -4.5rem;
+    // width: 150px;
+    bottom: -5rem;
   }
 
   .hero__cutout--2 {
@@ -144,8 +151,8 @@
   }
 
   .hero__cutout--3 {
-    width: 130px;
-    bottom: -6rem;
+    width: 150px;
+    top: 23rem;
   }
 }
 
@@ -162,13 +169,19 @@
 }
 
 // The full brand lockup (wordmark + "Cookie Café" + tagline baked in) is the
-// hero's dominant element per client direction — sized well above the other
-// app-logo placements (header/footer/meaning all stay compact). clamp()
-// instead of breakpoints since it scales continuously and the 1.5:1 image
-// ratio keeps its rendered width safely inside .hero__inner at every size.
+// hero's dominant element per client direction. Below 900px it's left
+// unconstrained so it fills .hero__inner's width edge-to-edge (the desired
+// mobile look); above that, an unconstrained width would blow up to ~640px+
+// against the wider container, so it's capped back down to a size in
+// proportion with the headline/cutouts next to it.
 .hero__logo-wrap {
-  height: clamp(170px, 30vw, 320px);
   animation: hero-float 7s ease-in-out infinite;
+}
+
+@media (min-width: 900px) {
+  .hero__logo-wrap {
+    height: clamp(270px, 30vw, 320px);
+  }
 }
 
 @keyframes hero-float {
@@ -188,7 +201,7 @@
 }
 
 .hero__subtext {
-  font-size: var(--fs-body-lg);
+  font-size: var(--fs-body-sm);
   color: var(--color-text-muted);
   max-width: 40ch;
 }

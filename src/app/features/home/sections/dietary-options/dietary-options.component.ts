@@ -7,24 +7,27 @@ import { CutoutRevealDirective } from '../../../../shared/directives/cutout-reve
 interface DietaryOption {
   title: string;
   description: string;
-  icon: 'gluten-free' | 'vegan' | 'sugar-conscious' | 'specialty';
+  /** Real client-supplied badge art (public/assets/badges/). */
+  imageSrc?: string;
+  /** Hand-drawn fallback icon, only for options with no badge art. */
+  icon?: 'specialty';
 }
 
 const OPTIONS: DietaryOption[] = [
   {
     title: 'Gluten Free',
     description: 'Baked without wheat, so guests avoiding gluten can still dig into something delicious.',
-    icon: 'gluten-free'
+    imageSrc: 'assets/badges/gluten-free.png'
   },
   {
     title: 'Vegan',
     description: 'Plant-based treats made without dairy or eggs, without sacrificing flavor or texture.',
-    icon: 'vegan'
+    imageSrc: 'assets/badges/vegan.png'
   },
   {
-    title: 'Sugar Conscious',
-    description: 'Thoughtfully developed for guests watching their sugar intake, including those managing diabetes.',
-    icon: 'sugar-conscious'
+    title: 'Diabetic Friendly',
+    description: 'Thoughtfully developed for guests managing diabetes or watching their sugar intake.',
+    imageSrc: 'assets/badges/diabetic-friendly.png'
   },
   {
     title: 'Specialty Desserts',
