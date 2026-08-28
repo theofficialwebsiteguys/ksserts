@@ -112,10 +112,10 @@
   // top on narrow viewports, so cutout--3 moves to the opposite bottom
   // corner from cutout--1 instead of fighting the text at top-left.
   .hero__cutout--3 {
-    width: 200px;
+    width: 180px;
     top: auto;
     left: auto;
-    bottom: -5rem;
+    bottom: -6.5rem;
     right: -2%;
   }
 }
@@ -131,8 +131,8 @@
   }
 
   .hero__cutout--3 {
-    width: 150px;
-    bottom: -4.5rem;
+    width: 130px;
+    bottom: -6rem;
   }
 }
 
@@ -185,6 +185,15 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
+}
+
+// .btn--outline-dark is transparent by default, which is fine on a flat
+// bg — but the cutouts bleed in behind this row on mobile, and a
+// transparent button lets that image show straight through it. Opaque
+// fill matching the hero's own bg hides that cleanly (identical to
+// transparent when nothing's behind it).
+.hero__ctas .btn--outline-dark {
+  background: var(--color-bg);
 }
 
 @media (max-width: 640px) {
