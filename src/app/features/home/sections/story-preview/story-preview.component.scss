@@ -4,32 +4,6 @@
   background: var(--color-bg-alt);
 }
 
-.story-preview__cutout {
-  position: absolute;
-  z-index: 1;
-  top: 2rem;
-  left: 0;
-  width: 270px;
-}
-
-@media (max-width: 1300px) {
-  .story-preview__cutout {
-    width: 210px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .story-preview__cutout {
-    width: 150px;
-  }
-}
-
-@media (max-width: 640px) {
-  .story-preview__cutout {
-    width: 110px;
-  }
-}
-
 .story-preview__inner {
   position: relative;
   z-index: 1;

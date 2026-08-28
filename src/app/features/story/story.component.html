@@ -29,9 +29,12 @@
       <h2>A Father's Love</h2>
       <p>
         Years ago, my father, Gabriel, was battling diabetes and its devastating complications, including
-        kidney failure. When he needed a kidney transplant, I donated one of my kidneys in the hope of
-        giving him more time with our family. Tragically, just four days after his transplant, he passed
-        away.
+        kidney failure. When he needed a kidney transplant, I didn't hesitate to be his donor. I told him
+        I had a present for him — they just had to take it out of me first.
+      </p>
+      <p>
+        On Father's Day, in the Dominican Republic, I gave him one of my kidneys, in the hope of giving
+        him more time with our family. Tragically, just four days after his transplant, he passed away.
       </p>
     </section>
 
@@ -69,13 +72,9 @@
       </p>
     </section>
 
-    @if (photoBreak().length) {
-      <div class="story-photobreak" appReveal>
-        @for (image of photoBreak(); track image.url) {
-          <img [src]="image.url" [alt]="''" loading="lazy" />
-        }
-      </div>
-    }
+    <figure class="story-photo" appReveal>
+      <img src="assets/father-karina.jpg" alt="Karina with her father, Gabriel" loading="lazy" />
+    </figure>
 
     <section class="story-block story-block--emphasis" appReveal>
       <h2>The Next Chapter</h2>

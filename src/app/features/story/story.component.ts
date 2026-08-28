@@ -1,10 +1,7 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { catchError, of } from 'rxjs';
 
-import { CommerceApiService } from '../../core/api/commerce-api.service';
 import { SeoService } from '../../core/services/seo.service';
-import { ProductImage } from '../../core/models/product.model';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { RevealDirective } from '../../shared/directives/reveal.directive';
 import { CutoutRevealDirective } from '../../shared/directives/cutout-reveal.directive';
@@ -16,11 +13,8 @@ import { CutoutRevealDirective } from '../../shared/directives/cutout-reveal.dir
   templateUrl: './story.component.html',
   styleUrl: './story.component.scss'
 })
-export class StoryComponent implements OnInit {
+export class StoryComponent {
   private readonly seo = inject(SeoService);
-  private readonly commerceApi = inject(CommerceApiService);
-
-  protected photoBreak = signal<ProductImage[]>([]);
 
   constructor() {
     this.seo.update({
@@ -30,12 +24,5 @@ export class StoryComponent implements OnInit {
       path: '/our-story',
       type: 'article'
     });
-  }
-
-  ngOnInit(): void {
-    this.commerceApi
-      .getShowcaseImages(2, 9)
-      .pipe(catchError(() => of([])))
-      .subscribe((images) => this.photoBreak.set(images));
   }
 }

@@ -57,6 +57,15 @@
   --cutout-delay: 0.35s;
 }
 
+// Near the headline, top-left — the biggest of the three per client direction.
+.hero__cutout--3 {
+  width: 440px;
+  top: -2rem;
+  left: -2%;
+  --cutout-rotate: -6deg;
+  --cutout-delay: 0.25s;
+}
+
 @media (max-width: 1300px) {
   .hero__cutout--1 {
     width: 360px;
@@ -64,6 +73,10 @@
 
   .hero__cutout--2 {
     width: 300px;
+  }
+
+  .hero__cutout--3 {
+    width: 330px;
   }
 }
 
@@ -74,6 +87,10 @@
 
   .hero__cutout--2 {
     width: 220px;
+  }
+
+  .hero__cutout--3 {
+    width: 250px;
   }
 }
 
@@ -88,6 +105,13 @@
   .hero__cutout--2 {
     width: 160px;
   }
+
+  // The big lockup logo now dominates the top of the section at this width,
+  // so cutout--3 drops below it to stay visible instead of hiding behind it.
+  .hero__cutout--3 {
+    width: 180px;
+    top: 19rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -98,6 +122,11 @@
 
   .hero__cutout--2 {
     width: 130px;
+  }
+
+  .hero__cutout--3 {
+    width: 140px;
+    top: 16rem;
   }
 }
 
