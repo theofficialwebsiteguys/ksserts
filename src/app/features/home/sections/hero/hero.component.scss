@@ -16,10 +16,10 @@
   pointer-events: none;
 }
 
-// Two big, intentionally-placed photos bleeding off the hero's own edges —
-// same treatment as the dietary-options section below it — rather than a
-// scatter of small floating cutouts. Sit behind the text column (z-index:0
-// vs .hero__inner's 1) so they can peek in at the column's edges instead of
+// Big, intentionally-placed photos bleeding off the hero's own edges — same
+// treatment as the dietary-options section below it — rather than a scatter
+// of small floating cutouts. Sit behind the text column (z-index:0 vs
+// .hero__inner's 1) so they can peek in at the column's edges instead of
 // being confined to the margins.
 .hero__cutout {
   position: absolute;
@@ -102,15 +102,21 @@
     bottom: -5rem;
   }
 
+  // Stays prominent at mobile widths instead of shrinking away — this is
+  // the one meant to read clearly at a glance per client direction.
   .hero__cutout--2 {
-    width: 160px;
+    width: 280px;
   }
 
-  // The big lockup logo now dominates the top of the section at this width,
-  // so cutout--3 drops below it to stay visible instead of hiding behind it.
+  // The centered headline/logo leave no safe width for a large image at the
+  // top on narrow viewports, so cutout--3 moves to the opposite bottom
+  // corner from cutout--1 instead of fighting the text at top-left.
   .hero__cutout--3 {
-    width: 180px;
-    top: 19rem;
+    width: 200px;
+    top: auto;
+    left: auto;
+    bottom: -5rem;
+    right: -2%;
   }
 }
 
@@ -121,12 +127,12 @@
   }
 
   .hero__cutout--2 {
-    width: 130px;
+    width: 220px;
   }
 
   .hero__cutout--3 {
-    width: 140px;
-    top: 16rem;
+    width: 150px;
+    bottom: -4.5rem;
   }
 }
 
