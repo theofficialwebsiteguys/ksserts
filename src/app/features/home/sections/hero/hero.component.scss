@@ -95,6 +95,19 @@
 }
 
 @media (max-width: 899px) {
+  // Full-height on mobile so the hero reads as its own screen instead of
+  // trailing off partway into the next section on the initial view.
+  // min-height (not height) so unusually tall content still isn't clipped.
+  // The vh fallback keeps older browsers correct; dvh (where supported)
+  // accounts for the mobile browser chrome so nothing sits under it.
+  .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .hero__cutout--1 {
     width: 190px;
     // Sits lower than the desktop bleed so it clears the subtext paragraph
