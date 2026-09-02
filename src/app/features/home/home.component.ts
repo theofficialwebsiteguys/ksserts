@@ -7,6 +7,7 @@ import { FeaturedProductsComponent } from './sections/featured-products/featured
 import { StoryPreviewComponent } from './sections/story-preview/story-preview.component';
 import { MeaningComponent } from './sections/meaning/meaning.component';
 import { MissionComponent } from './sections/mission/mission.component';
+import { TestimonialsComponent } from './sections/testimonials/testimonials.component';
 import { CookieCafeComponent } from './sections/cookie-cafe/cookie-cafe.component';
 import { GoFundMeComponent } from './sections/gofundme/gofundme.component';
 import { SocialComponent } from './sections/social/social.component';
@@ -21,6 +22,7 @@ import { SocialComponent } from './sections/social/social.component';
     StoryPreviewComponent,
     MeaningComponent,
     MissionComponent,
+    TestimonialsComponent,
     CookieCafeComponent,
     GoFundMeComponent,
     SocialComponent

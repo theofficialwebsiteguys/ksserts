@@ -1,0 +1,188 @@
+.testimonials {
+  position: relative;
+}
+
+.testimonials__header {
+  max-width: 42rem;
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.testimonials__title {
+  font-size: var(--fs-display-md);
+  margin-block: var(--space-xs);
+}
+
+.testimonials__intro {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body-lg);
+}
+
+// A "notes pinned to a board" wall rather than a carousel — a bento grid
+// with two intentionally larger cards for the longer reviews, every card
+// tilted a few degrees off-axis and straightening on hover, like picking a
+// note up off the board.
+.testimonials__wall {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: var(--space-md);
+}
+
+.note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  // Grid items default to min-width:auto, so an unbroken string (an
+  // @handle, a hashtag) can force its track wider than the container even
+  // though the tracks are all 1fr — this lets it shrink and wrap instead.
+  min-width: 0;
+  overflow-wrap: break-word;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+  // Standalone rotate/translate, not the transform shorthand — appReveal
+  // (see reveal.directive) animates this same element's `transform` for its
+  // fade-in, and a shorthand here would fight that once revealed. Standalone
+  // properties compose with `transform` instead of overriding it.
+  rotate: var(--note-rotate, 0deg);
+  transition: rotate var(--transition-base), translate var(--transition-base), box-shadow var(--transition-base);
+}
+
+.note:hover {
+  rotate: 0deg;
+  translate: 0 -6px;
+  box-shadow: var(--shadow-lg);
+  z-index: 1;
+}
+
+.note:nth-child(3n+1) {
+  --note-rotate: -1.75deg;
+}
+
+.note:nth-child(3n+2) {
+  --note-rotate: 1.25deg;
+}
+
+.note:nth-child(3n) {
+  --note-rotate: -1deg;
+}
+
+// The two longer reviews get more room and stay level — legible paragraph
+// text doesn't want to fight a tilt the way a one-liner can. Compound
+// selector so this outweighs the :nth-child rules above (equal specificity
+// would otherwise leave whichever nth-child rule matches this same element
+// in control, regardless of source order).
+.note.note--featured {
+  grid-column: span 2;
+  --note-rotate: 0deg;
+}
+
+.note__stars {
+  display: flex;
+  gap: 0.2rem;
+  color: var(--color-brand-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.note__stars svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.note__ig {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-brand-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.note:nth-child(even) .note__stars,
+.note:nth-child(even) .note__ig {
+  color: var(--color-accent-sky);
+}
+
+.note__quote {
+  flex: 1;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+// Short, punchy handle-attributed quotes read like a caption — the display
+// script gives them the same handwritten warmth as the rest of the site.
+// Longer paragraph reviews stay in the body font so they're comfortable to
+// actually read at length.
+.note--handle .note__quote {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+
+.note:not(.note--handle) .note__quote {
+  font-size: var(--fs-body-md);
+  line-height: 1.65;
+}
+
+.note--featured .note__quote {
+  font-size: var(--fs-body-lg);
+}
+
+.note__attribution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0;
+  font-size: var(--fs-body-sm);
+}
+
+.note__name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.note__meta {
+  color: var(--color-text-muted);
+}
+
+.note__meta::before {
+  content: '— ';
+}
+
+@media (max-width: 1100px) {
+  .testimonials__wall {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .note.note--featured {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials__wall {
+    grid-template-columns: 1fr;
+  }
+
+  // Compound selector — the base .note.note--featured rule above is
+  // already (0,2,0) specificity, so a plain .note--featured here would
+  // lose regardless of media query/source order and stay stuck at span 2.
+  .note.note--featured {
+    grid-column: span 1;
+  }
+
+  // A tilted card eats into its neighbors on a single narrow column — keep
+  // everything level on phones. Compound selector to outweigh the
+  // :nth-child rules above (same specificity trap as .note--featured).
+  .testimonials__wall .note {
+    --note-rotate: 0deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note {
+    transition: none;
+  }
+}
