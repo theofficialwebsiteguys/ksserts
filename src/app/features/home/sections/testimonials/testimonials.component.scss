@@ -1,8 +1,34 @@
 .testimonials {
   position: relative;
+  overflow: hidden;
+}
+
+.testimonials__cutout {
+  position: absolute;
+  z-index: 0;
+  top: -2rem;
+  left: 2%;
+  width: 200px;
+  opacity: 0.8;
+  --cutout-rotate: -8deg;
+}
+
+@media (max-width: 900px) {
+  .testimonials__cutout {
+    width: 140px;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials__cutout {
+    width: 100px;
+    top: -1rem;
+  }
 }
 
 .testimonials__header {
+  position: relative;
+  z-index: 1;
   max-width: 42rem;
   margin-inline: auto;
   margin-bottom: var(--space-xl);
@@ -24,6 +50,8 @@
 // tilted a few degrees off-axis and straightening on hover, like picking a
 // note up off the board.
 .testimonials__wall {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;

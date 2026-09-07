@@ -18,6 +18,29 @@
   background: linear-gradient(180deg, rgba(51, 43, 45, 0.85), rgba(51, 43, 45, 0.9));
 }
 
+.gofundme__cutout {
+  position: absolute;
+  z-index: 0;
+  bottom: -2rem;
+  left: 3%;
+  width: 220px;
+  opacity: 0.85;
+  --cutout-rotate: 7deg;
+}
+
+@media (max-width: 900px) {
+  .gofundme__cutout {
+    width: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .gofundme__cutout {
+    width: 100px;
+    bottom: -1rem;
+  }
+}
+
 .gofundme__inner {
   position: relative;
   z-index: 1;

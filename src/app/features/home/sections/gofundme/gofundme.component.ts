@@ -5,11 +5,12 @@ import { environment } from '../../../../../environments/environment';
 import { CommerceApiService } from '../../../../core/api/commerce-api.service';
 import { ProductImage } from '../../../../core/models/product.model';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
+import { CutoutRevealDirective } from '../../../../shared/directives/cutout-reveal.directive';
 
 @Component({
   selector: 'app-home-gofundme',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, CutoutRevealDirective],
   templateUrl: './gofundme.component.html',
   styleUrl: './gofundme.component.scss'
 })

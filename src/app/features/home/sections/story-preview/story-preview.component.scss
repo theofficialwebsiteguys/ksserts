@@ -4,6 +4,29 @@
   background: var(--color-bg-alt);
 }
 
+.story-preview__cutout {
+  position: absolute;
+  z-index: 0;
+  bottom: -2rem;
+  right: 3%;
+  width: 240px;
+  opacity: 0.75;
+  --cutout-rotate: -9deg;
+}
+
+@media (max-width: 900px) {
+  .story-preview__cutout {
+    width: 160px;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-preview__cutout {
+    width: 110px;
+    bottom: -1rem;
+  }
+}
+
 .story-preview__inner {
   position: relative;
   z-index: 1;

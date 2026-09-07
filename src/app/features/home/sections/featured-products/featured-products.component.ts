@@ -9,13 +9,22 @@ import { ProductCardSkeletonComponent } from '../../../../shared/components/prod
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
 import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
+import { CutoutRevealDirective } from '../../../../shared/directives/cutout-reveal.directive';
 
 const FEATURED_COUNT = 8;
 
 @Component({
   selector: 'app-home-featured-products',
   standalone: true,
-  imports: [RouterLink, ProductCardComponent, ProductCardSkeletonComponent, EmptyStateComponent, ErrorStateComponent, RevealDirective],
+  imports: [
+    RouterLink,
+    ProductCardComponent,
+    ProductCardSkeletonComponent,
+    EmptyStateComponent,
+    ErrorStateComponent,
+    RevealDirective,
+    CutoutRevealDirective
+  ],
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.scss'
 })

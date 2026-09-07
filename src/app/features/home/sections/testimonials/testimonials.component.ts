@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
+import { CutoutRevealDirective } from '../../../../shared/directives/cutout-reveal.directive';
 
 interface Testimonial {
   quote: string;
@@ -70,7 +71,7 @@ const TESTIMONIALS: Testimonial[] = [
 @Component({
   selector: 'app-home-testimonials',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, CutoutRevealDirective],
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.scss'
 })

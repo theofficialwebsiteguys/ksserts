@@ -1,4 +1,34 @@
+.featured {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured__cutout {
+  position: absolute;
+  z-index: 0;
+  top: -2rem;
+  right: 4%;
+  width: 220px;
+  opacity: 0.9;
+  --cutout-rotate: 8deg;
+}
+
+@media (max-width: 900px) {
+  .featured__cutout {
+    width: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .featured__cutout {
+    width: 110px;
+    top: -1rem;
+  }
+}
+
 .featured__header {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -12,6 +42,8 @@
 }
 
 .featured__grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-lg) var(--space-md);
