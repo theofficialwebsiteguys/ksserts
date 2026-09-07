@@ -1,5 +1,10 @@
 import { Money, ProductImage, SelectedOption } from './product.model';
 
+export interface CartAttribute {
+  key: string;
+  value: string;
+}
+
 export interface CartLineMerchandise {
   id: string;
   title: string;
@@ -19,6 +24,15 @@ export interface CartLine {
   cost: {
     totalAmount: Money;
   };
+  /** Custom key/value pairs attached at add-to-cart time (e.g. build-a-box grouping). */
+  attributes?: CartAttribute[];
+}
+
+/** One line to add to the cart. `attributes` round-trip to Shopify's real cart line attributes. */
+export interface CartLineInput {
+  variantId: string;
+  quantity: number;
+  attributes?: CartAttribute[];
 }
 
 export interface CartCost {

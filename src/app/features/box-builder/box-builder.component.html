@@ -1,0 +1,141 @@
+<div class="box-builder-page container">
+  <a routerLink="/shop" class="box-builder-page__back">&larr; Back to Shop</a>
+
+  <header class="box-builder-page__header">
+    <p class="eyebrow">Build Your Own Box</p>
+    <h1 class="box-builder-page__title">Pick Your Perfect Mix</h1>
+    <p class="box-builder-page__intro text-balance">
+      Choose a box size, then fill it with any combination of cookies you love — mix flavors however you like.
+    </p>
+  </header>
+
+  <div class="box-builder__sizes" role="group" aria-label="Choose a box size">
+  @for (size of sizes; track size) {
+    <button
+      type="button"
+      class="box-size"
+      [class.is-selected]="boxSize() === size"
+      [attr.aria-pressed]="boxSize() === size"
+      (click)="chooseSize(size)"
+    >
+      <span class="box-size__count">{{ size }}</span>
+      <span class="box-size__label">cookies</span>
+    </button>
+  }
+</div>
+
+@if (boxSize(); as size) {
+      @if (loading()) {
+        <ul class="box-builder__grid" aria-hidden="true">
+          @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
+            <li class="box-item-skeleton">
+              <div class="skeleton-block box-item-skeleton__image"></div>
+              <div class="skeleton-block box-item-skeleton__line"></div>
+            </li>
+          }
+        </ul>
+      } @else if (error()) {
+        <app-error-state
+          title="We couldn't load the box options"
+          message="Please refresh the page and try again in a moment."
+          (retry)="load()"
+        />
+      } @else if (products().length === 0) {
+        <app-empty-state
+          title="No cookies available for boxes right now"
+          message="Check back soon, or browse the full shop for what's available."
+        />
+      } @else {
+        <div class="box-builder__layout">
+          <ul class="box-builder__grid">
+            @for (product of products(); track product.id) {
+              <li class="box-item" [class.is-unavailable]="maxFor(product) === 0 && quantityFor(product) === 0">
+                <div class="box-item__image">
+                  @if (product.images[0]; as img) {
+                    <img [src]="img.url" [alt]="img.altText || product.title" loading="lazy" />
+                  } @else {
+                    <div class="box-item__placeholder" aria-hidden="true">K'sserts</div>
+                  }
+                </div>
+
+                <div class="box-item__body">
+                  <p class="box-item__title">{{ product.title }}</p>
+                  <app-dietary-badges [badges]="getDietaryBadges(product)" size="sm" />
+                  <p class="box-item__price">{{ formatMoney(product.priceRange.minVariantPrice) }} each</p>
+                </div>
+
+                <app-quantity-selector
+                  [value]="quantityFor(product)"
+                  [min]="0"
+                  [max]="maxFor(product)"
+                  [label]="product.title"
+                  [disabled]="maxFor(product) === 0 && quantityFor(product) === 0"
+                  (valueChange)="setQuantity(product, $event)"
+                />
+              </li>
+            }
+          </ul>
+
+          <aside class="box-summary" aria-live="polite">
+            <div class="box-summary__header">
+              <p class="box-summary__size">Box of {{ size }}</p>
+              <button type="button" class="box-summary__change" (click)="changeSize()">Change size</button>
+            </div>
+
+            <p class="box-summary__progress">
+              <strong>{{ totalSelected() }}</strong> of {{ size }} selected
+              @if (remaining() > 0) {
+                <span class="box-summary__remaining">— {{ remaining() }} left to add</span>
+              }
+            </p>
+            <div
+              class="box-summary__bar"
+              role="progressbar"
+              [attr.aria-valuenow]="totalSelected()"
+              aria-valuemin="0"
+              [attr.aria-valuemax]="size"
+            >
+              <div class="box-summary__bar-fill" [style.width.%]="(totalSelected() / size) * 100"></div>
+            </div>
+
+            @if (selectedItems().length) {
+              <ul class="box-summary__items">
+                @for (item of selectedItems(); track item.product.id) {
+                  <li>
+                    <span>{{ item.quantity }}&times; {{ item.product.title }}</span>
+                    <span>{{ formatMoney(item.variant.price) }}</span>
+                  </li>
+                }
+              </ul>
+            } @else {
+              <p class="box-summary__empty">Pick some cookies to fill your box.</p>
+            }
+
+            <div class="box-summary__total">
+              <span>Total</span>
+              <span>{{ totalPriceDisplay() }}</span>
+            </div>
+
+            @if (cartService.error(); as err) {
+              <p class="box-summary__error" role="alert">{{ err }}</p>
+            }
+
+            <button
+              type="button"
+              class="btn btn--primary btn--block"
+              [disabled]="!isComplete() || submitting()"
+              (click)="addToCart()"
+            >
+              @if (submitting()) {
+                Adding to Cart...
+              } @else if (isComplete()) {
+                Add Box to Cart
+              } @else {
+                Add {{ remaining() }} More to Continue
+              }
+            </button>
+          </aside>
+        </div>
+      }
+    }
+</div>

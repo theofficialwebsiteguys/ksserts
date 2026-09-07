@@ -1,7 +1,21 @@
+// `--color-bg-alt` (noir-900) sits too close to `--color-bg` (noir-950) to
+// read as a real shift, and even noir-800 was too subtle side-by-side with
+// the rest of the (deliberately near-black) site — the whole shop route
+// is bumped two steps up the noir scale instead, with `--color-surface`/
+// `--color-bg-alt` bumped to match so cards, box-item tiles, and the box
+// summary panel (which all key off those tokens) still land one step
+// lighter than the page and keep reading as raised, not swallowed by the
+// brighter background. Still a dark warm gray, not a light theme — just a
+// confident, unmistakable step away from the rest of the site's black.
+:host {
+  --color-surface: var(--color-noir-600);
+  --color-bg-alt: var(--color-noir-600);
+}
+
 .shop-hero {
   position: relative;
   overflow: hidden;
-  background: var(--color-bg);
+  background: var(--color-noir-700);
   color: var(--color-text);
   padding-top: calc(var(--header-height) + var(--space-xl));
   padding-bottom: var(--space-xl);
@@ -63,7 +77,74 @@
 }
 
 .shop {
+  background: var(--color-noir-700);
   padding-block: var(--space-xl) var(--space-3xl);
+}
+
+// Mirrors ProductCardComponent's own layout/tokens (font-display title,
+// aspect-ratio media, same spacing scale) so it reads as "one more product"
+// in the grid rather than a foreign element, per the client's explicit ask
+// — but declared fresh here rather than sharing classes, since Angular's
+// per-component style encapsulation means product-card.component.scss's
+// rules don't reach this template anyway.
+.box-builder-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: var(--space-sm);
+  color: inherit;
+  text-decoration: none;
+}
+
+.box-builder-card__media {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-coral-800), var(--color-coral-700));
+}
+
+.box-builder-card__icon {
+  width: 38%;
+  height: 38%;
+  color: var(--color-cream-50);
+  transition: transform var(--transition-fast);
+}
+
+.box-builder-card:hover .box-builder-card__icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.box-builder-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  flex: 1;
+}
+
+.box-builder-card__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.box-builder-card__actions {
+  margin-top: auto;
+  padding-top: var(--space-2xs);
+}
+
+.box-builder-card__desc {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box-builder-card__icon {
+    transition: none;
+  }
 }
 
 .shop__layout {

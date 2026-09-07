@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { CartService } from '../../../core/services/cart.service';
@@ -38,9 +38,14 @@ export class ProductCardComponent {
   /** Only offer one-tap add when there's a single, unambiguous variant to add. */
   protected canQuickAdd = computed(() => this.available() && this.product().variants.length === 1);
 
+  /** This card's own in-flight state — not `cartService.loading()`, which is shared across every card on the page. */
+  protected adding = signal(false);
+
   quickAdd(): void {
+    if (this.adding()) return;
     const variant = this.product().variants[0];
     if (!variant) return;
-    this.cartService.addLine(variant.id, 1);
+    this.adding.set(true);
+    this.cartService.addLine(variant.id, 1).subscribe(() => this.adding.set(false));
   }
 }

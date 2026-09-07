@@ -14,6 +14,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/shop/shop.component').then((m) => m.ShopComponent)
   },
   {
+    // Must come before 'shop/:handle' — otherwise that param route swallows this exact path first.
+    path: 'shop/build-a-box',
+    loadComponent: () => import('./features/box-builder/box-builder.component').then((m) => m.BoxBuilderComponent)
+  },
+  {
     path: 'shop/:handle',
     loadComponent: () => import('./features/product/product.component').then((m) => m.ProductComponent)
   },

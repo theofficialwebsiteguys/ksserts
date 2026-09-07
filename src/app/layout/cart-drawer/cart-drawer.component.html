@@ -39,38 +39,84 @@
       </div>
     } @else {
       <ul class="cart-drawer__lines">
-        @for (line of cartService.cart()!.lines; track trackLine($index, line)) {
-          <li class="cart-line">
-            @if (line.merchandise.image; as thumb) {
-              <img class="cart-line__image" [src]="thumb.url" [alt]="thumb.altText || line.merchandise.product.title" loading="lazy" />
-            } @else {
-              <div class="cart-line__image cart-line__image--placeholder" aria-hidden="true"></div>
-            }
-
-            <div class="cart-line__details">
-              <p class="cart-line__title">{{ line.merchandise.product.title }}</p>
-              @if (line.merchandise.selectedOptions.length && line.merchandise.selectedOptions[0].value !== 'Default Title') {
-                <p class="cart-line__options">
-                  @for (opt of line.merchandise.selectedOptions; track opt.name) {
-                    <span>{{ opt.name }}: {{ opt.value }}</span>
-                  }
-                </p>
+        @for (item of displayItems(); track trackDisplayItem($index, item)) {
+          @if (item.kind === 'single') {
+            <li class="cart-line">
+              @if (item.line.merchandise.image; as thumb) {
+                <img class="cart-line__image" [src]="thumb.url" [alt]="thumb.altText || item.line.merchandise.product.title" loading="lazy" />
+              } @else {
+                <div class="cart-line__image cart-line__image--placeholder" aria-hidden="true"></div>
               }
-              <p class="cart-line__price">{{ formatMoney(line.merchandise.price) }}</p>
 
-              <div class="cart-line__footer">
-                <app-quantity-selector
-                  [value]="line.quantity"
-                  [label]="line.merchandise.product.title"
-                  [disabled]="cartService.loading()"
-                  (valueChange)="onQuantityChange(line, $event)"
-                />
-                <button type="button" class="cart-line__remove" (click)="cartService.removeLine(line.id)" [disabled]="cartService.loading()">
-                  Remove
-                </button>
+              <div class="cart-line__details">
+                @if (visibleAttributes(item.line); as attrs) {
+                  @if (attrs.length) {
+                    <p class="cart-line__badges">
+                      @for (attr of attrs; track attr.key) {
+                        <span class="cart-line__badge">{{ attr.value }}</span>
+                      }
+                    </p>
+                  }
+                }
+                <p class="cart-line__title">{{ item.line.merchandise.product.title }}</p>
+                @if (item.line.merchandise.selectedOptions.length && item.line.merchandise.selectedOptions[0].value !== 'Default Title') {
+                  <p class="cart-line__options">
+                    @for (opt of item.line.merchandise.selectedOptions; track opt.name) {
+                      <span>{{ opt.name }}: {{ opt.value }}</span>
+                    }
+                  </p>
+                }
+                <p class="cart-line__price">{{ formatMoney(item.line.merchandise.price) }}</p>
+
+                <div class="cart-line__footer">
+                  <app-quantity-selector
+                    [value]="item.line.quantity"
+                    [label]="item.line.merchandise.product.title"
+                    [disabled]="isBusy(item.line.id)"
+                    (valueChange)="onQuantityChange(item.line, $event)"
+                  />
+                  <button type="button" class="cart-line__remove" (click)="removeLine(item.line)" [disabled]="isBusy(item.line.id)">
+                    Remove
+                  </button>
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          } @else {
+            <li class="cart-line cart-line--box">
+              <span class="cart-line__image cart-line__image--box" aria-hidden="true">
+                <svg class="cart-line__box-icon" viewBox="0 0 48 48" fill="none">
+                  <rect x="7" y="20" width="34" height="21" rx="2" stroke="currentColor" stroke-width="2.2" />
+                  <path d="M7 27h34" stroke="currentColor" stroke-width="2.2" />
+                  <path d="M24 20v21" stroke="currentColor" stroke-width="2.2" />
+                  <path d="M24 20c-3-9-15-9-15 0M24 20c3-9 15-9 15 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+                </svg>
+              </span>
+
+              <div class="cart-line__details">
+                <p class="cart-line__badges">
+                  <span class="cart-line__badge">{{ item.label }}</span>
+                </p>
+                <p class="cart-line__title">Build Your Own Box</p>
+
+                <ul class="cart-box__breakdown">
+                  @for (line of item.lines; track line.id) {
+                    <li>
+                      <span>{{ line.quantity }}&times; {{ line.merchandise.product.title }}</span>
+                      <span>{{ formatMoney(line.cost.totalAmount) }}</span>
+                    </li>
+                  }
+                </ul>
+
+                <p class="cart-line__price">{{ formatMoney(groupTotal(item)) }}</p>
+
+                <div class="cart-line__footer">
+                  <button type="button" class="cart-line__remove" (click)="removeGroup(item)" [disabled]="isGroupBusy(item)">
+                    Remove Box
+                  </button>
+                </div>
+              </div>
+            </li>
+          }
         }
       </ul>
     }

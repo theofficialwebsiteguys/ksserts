@@ -11,5 +11,10 @@ export const environment: Environment = {
   social: {
     instagramUrl: 'https://instagram.com/ksserts',
     facebookUrl: 'https://www.facebook.com/share/17pFzd7xhX/?mibextid=wwXIfr'
+  },
+  // TODO: confirm this matches the real Shopify collection handle once it's created.
+  boxBuilder: {
+    collectionHandle: 'build-your-own-box',
+    sizes: [4, 6, 12]
   }
 };

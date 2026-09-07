@@ -1,4 +1,6 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { catchError, forkJoin, of } from 'rxjs';
 
 import { CommerceApiService } from '../../core/api/commerce-api.service';
@@ -27,6 +29,8 @@ const PAGE_SIZE = 12;
   selector: 'app-shop',
   standalone: true,
   imports: [
+    NgTemplateOutlet,
+    RouterLink,
     ProductCardComponent,
     ProductCardSkeletonComponent,
     EmptyStateComponent,

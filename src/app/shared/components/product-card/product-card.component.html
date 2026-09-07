@@ -47,9 +47,13 @@
           type="button"
           class="btn btn--primary btn--sm btn--block"
           (click)="quickAdd()"
-          [disabled]="cartService.loading()"
+          [disabled]="adding()"
         >
-          Quick Add
+          @if (adding()) {
+            Adding...
+          } @else {
+            Quick Add
+          }
         </button>
       } @else {
         <a class="btn btn--outline-dark btn--sm btn--block" [routerLink]="['/shop', product().handle]">
