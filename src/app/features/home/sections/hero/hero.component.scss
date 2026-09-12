@@ -109,25 +109,34 @@
   }
 
   // Sits close behind the CTA row rather than bleeding far below it — the
-  // (opaque) buttons safely mask the overlap.
+  // (opaque) buttons safely mask the overlap. Shrunk and pushed further
+  // down than the desktop/tablet version so its top edge clears the
+  // subtext paragraph even on short phones (iPhone SE-class), where the
+  // vertically-centered content sits closer to the bottom edge.
   .hero__cutout--1 {
-    // width: 190px;
-    bottom: -2.5rem;
+    width: 200px;
+    bottom: -6rem;
   }
 
   // Stays prominent at mobile widths instead of shrinking away — this is
   // the one meant to read clearly at a glance per client direction.
   .hero__cutout--2 {
     width: 280px;
-    right: -20%;
+    right: -33%;
   }
 
-  // Stays top-left like desktop, just small enough to clear the centered
-  // headline/logo at this width instead of fighting the text.
+  // Hidden below 900px: at this width there's a full-bleed unconstrained
+  // logo lockup plus a two-line headline plus a paragraph all vertically
+  // centered in the viewport, and a third floating cutout has no reliably
+  // blank spot left to sit in — a fixed offset here overlapped the
+  // headline on every real phone size tested (iPhone SE/14/14 Pro), since
+  // centered content shifts with viewport height but a `top`-pinned
+  // element doesn't. Two cutouts (top-right + bottom) already carry the
+  // mobile hero.
   .hero__cutout--3 {
-    width: 110px;
-    top: -0.5rem;
-    left: -2%;
+    width: 160px;
+    top: 0;
+    left: -12%;
   }
 
   .hero__headline {
@@ -141,18 +150,8 @@
 }
 
 @media (max-width: 560px) {
-  .hero__cutout--1 {
-    // width: 150px;
-    bottom: -5rem;
-  }
-
   .hero__cutout--2 {
     width: 220px;
-  }
-
-  .hero__cutout--3 {
-    width: 150px;
-    top: 23rem;
   }
 }
 
