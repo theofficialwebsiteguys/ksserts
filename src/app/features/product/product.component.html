@@ -32,7 +32,7 @@
 
       <div class="product-info">
         <app-dietary-badges [badges]="dietaryBadges()" />
-        <h1 class="product-info__title">{{ product.title }}</h1>
+        <h1 class="product-info__title">{{ displayTitle() }}</h1>
 
         @if (selectedVariant(); as variant) {
           <p class="product-info__price">
@@ -53,6 +53,24 @@
 
         @if (product.description) {
           <p class="product-info__description">{{ product.description }}</p>
+        }
+
+        @if (productGroup().length > 1) {
+          <div class="product-option">
+            <p class="product-option__label">Type</p>
+            <div class="product-option__values">
+              @for (sibling of productGroup(); track sibling.id) {
+                <button
+                  type="button"
+                  class="product-option__value"
+                  [class.is-selected]="sibling.id === product.id"
+                  (click)="selectDietVariant(sibling)"
+                >
+                  {{ dietLabel(sibling) }}
+                </button>
+              }
+            </div>
+          </div>
         }
 
         @for (option of visibleOptions(); track option.name) {

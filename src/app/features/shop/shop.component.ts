@@ -8,6 +8,7 @@ import { SeoService } from '../../core/services/seo.service';
 import { Collection } from '../../core/models/collection.model';
 import { Product } from '../../core/models/product.model';
 import { DietaryTagKey, getAvailableDietaryFilters, getDietaryBadges } from '../../core/utils/dietary.util';
+import { GroupedProduct, groupProducts } from '../../core/utils/product-grouping.util';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { ProductCardSkeletonComponent } from '../../shared/components/product-card-skeleton/product-card-skeleton.component';
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
@@ -62,6 +63,9 @@ export class ShopComponent {
 
   protected availableDietaryFilters = computed(() => getAvailableDietaryFilters(this.allProducts()));
 
+  /** Same-flavor diet variants ("Gluten-Free Chocolate Chip" / "Vegan Chocolate Chip") collapse into one card. */
+  protected productGroups = computed<GroupedProduct[]>(() => groupProducts(this.allProducts()));
+
   protected hasActiveFilters = computed(
     () => !!this.selectedCollection() || this.selectedDietary().size > 0 || this.availableOnly() || !!this.searchTerm()
   );
@@ -73,7 +77,7 @@ export class ShopComponent {
     const search = this.searchTerm().trim().toLowerCase();
     const sort = this.sortKey();
 
-    let results = this.allProducts().filter((product) => {
+    let results = this.productGroups().filter((product) => {
       if (collection && !product.collections?.includes(collection)) return false;
       if (availableOnly && !product.availableForSale) return false;
       if (dietary.size > 0) {

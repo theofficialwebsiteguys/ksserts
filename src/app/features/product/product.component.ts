@@ -1,5 +1,5 @@
 import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
 
 import { CommerceApiService } from '../../core/api/commerce-api.service';
@@ -8,6 +8,7 @@ import { SeoService } from '../../core/services/seo.service';
 import { Product, ProductMetafield } from '../../core/models/product.model';
 import { formatMoney } from '../../core/utils/money.util';
 import { getDietaryBadges } from '../../core/utils/dietary.util';
+import { getDietLabel, getGroupDisplayTitle, getGroupKey, sortByDiet } from '../../core/utils/product-grouping.util';
 import { DietaryBadgesComponent } from '../../shared/components/dietary-badges/dietary-badges.component';
 import { QuantitySelectorComponent } from '../../shared/components/quantity-selector/quantity-selector.component';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
@@ -24,11 +25,13 @@ const JSON_LD_ID = 'product-jsonld';
 })
 export class ProductComponent implements OnDestroy {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly commerceApi = inject(CommerceApiService);
   protected readonly cartService = inject(CartService);
   private readonly seo = inject(SeoService);
 
   protected readonly formatMoney = formatMoney;
+  protected readonly dietLabel = getDietLabel;
 
   protected product = signal<Product | null>(null);
   protected loading = signal(true);
@@ -39,6 +42,16 @@ export class ProductComponent implements OnDestroy {
   protected activeImageIndex = signal(0);
   protected quantity = signal(1);
   protected relatedProducts = signal<Product[]>([]);
+
+  /** Sibling diet variants of the same flavor ("Gluten-Free Chocolate Chip" / "Vegan Chocolate Chip"), including this one. */
+  protected productGroup = signal<Product[]>([]);
+
+  /** The flavor name shown as the page title when this product has diet siblings — otherwise its own title, unchanged. */
+  protected displayTitle = computed(() => {
+    const product = this.product();
+    if (!product) return '';
+    return this.productGroup().length > 1 ? getGroupDisplayTitle(product.title) : product.title;
+  });
 
   protected dietaryBadges = computed(() => (this.product() ? getDietaryBadges(this.product()!) : []));
   protected isGlutenFree = computed(() => this.dietaryBadges().some((badge) => badge.key === 'gluten-free'));
@@ -107,6 +120,11 @@ export class ProductComponent implements OnDestroy {
     this.cartService.addLine(variant.id, this.quantity());
   }
 
+  selectDietVariant(sibling: Product): void {
+    if (sibling.id === this.product()?.id) return;
+    this.router.navigate(['/shop', sibling.handle]);
+  }
+
   retry(): void {
     this.loading.set(true);
     this.error.set(false);
@@ -147,10 +165,17 @@ export class ProductComponent implements OnDestroy {
       .pipe(catchError(() => of(null)))
       .subscribe((response) => {
         if (!response) {
+          this.productGroup.set([product]);
           this.relatedProducts.set([]);
           return;
         }
-        const others = response.products.filter((p) => p.id !== product.id);
+
+        const groupKey = getGroupKey(product);
+        const siblings = sortByDiet(response.products.filter((p) => getGroupKey(p) === groupKey));
+        this.productGroup.set(siblings.length ? siblings : [product]);
+
+        const siblingIds = new Set(siblings.map((p) => p.id));
+        const others = response.products.filter((p) => !siblingIds.has(p.id));
         const sameTag = others.filter((p) => p.tags.some((tag) => product.tags.includes(tag)));
         const pool = sameTag.length > 0 ? sameTag : others;
         this.relatedProducts.set(pool.slice(0, 4));

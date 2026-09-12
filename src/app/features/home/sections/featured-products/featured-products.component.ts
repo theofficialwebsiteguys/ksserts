@@ -4,6 +4,7 @@ import { catchError, of } from 'rxjs';
 
 import { CommerceApiService } from '../../../../core/api/commerce-api.service';
 import { Product } from '../../../../core/models/product.model';
+import { groupProducts } from '../../../../core/utils/product-grouping.util';
 import { ProductCardComponent } from '../../../../shared/components/product-card/product-card.component';
 import { ProductCardSkeletonComponent } from '../../../../shared/components/product-card-skeleton/product-card-skeleton.component';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
@@ -53,7 +54,7 @@ export class FeaturedProductsComponent implements OnInit {
       )
       .subscribe((response) => {
         if (response) {
-          this.products.set(response.products.slice(0, FEATURED_COUNT));
+          this.products.set(groupProducts(response.products).slice(0, FEATURED_COUNT));
         }
         this.loading.set(false);
       });
