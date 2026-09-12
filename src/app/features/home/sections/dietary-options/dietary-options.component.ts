@@ -16,22 +16,27 @@ interface DietaryOption {
 const OPTIONS: DietaryOption[] = [
   {
     title: 'Gluten Free',
-    description: 'Baked without wheat, so guests avoiding gluten can still dig into something delicious.',
+    description: 'Made without gluten-containing ingredients and crafted to be every bit as indulgent.',
     imageSrc: 'assets/badges/gluten-free.png'
   },
   {
     title: 'Vegan',
-    description: 'Plant-based treats made without dairy or eggs, without sacrificing flavor or texture.',
+    description: 'Made without dairy or eggs, but never without the rich flavor and texture you crave.',
     imageSrc: 'assets/badges/vegan.png'
   },
   {
     title: 'Diabetic Friendly',
-    description: 'Thoughtfully developed for guests managing diabetes or watching their sugar intake.',
+    description: 'Thoughtfully made without added sugar—because everyone deserves something sweet.',
     imageSrc: 'assets/badges/diabetic-friendly.png'
   },
   {
+    title: 'Gluten-Free + Vegan',
+    description: 'Made without gluten-containing ingredients, dairy, or eggs because more options should never mean less flavor.',
+    imageSrc: 'assets/badges/gf-vegan.png'
+  },
+  {
     title: 'Specialty Desserts',
-    description: 'Almond-flour bakes and other specialty recipes crafted with care for particular needs.',
+    description: 'Made without gluten-containing ingredients, dairy, or eggs—because more options should never mean less flavor',
     icon: 'specialty'
   }
 ];
