@@ -4,13 +4,12 @@
   background: var(--color-bg);
   color: var(--color-text);
   padding-top: calc(var(--header-height) + var(--space-2xl));
-  padding-bottom: var(--space-2xl);
 }
 
 .story-hero__inner {
   position: relative;
   z-index: 1;
-  max-width: 42rem;
+  max-width: 54rem;
 }
 
 .story-hero__title {
@@ -70,8 +69,12 @@
   padding-block: var(--space-2xl);
 }
 
+// Widened from 46rem — at the old width, the page read as a single
+// cramped column even on wide desktop screens. Still comfortably
+// readable at this measure since --fs-body-lg is a large body size with
+// generous line-height, and .container's own padding still eats into it.
 .story__inner {
-  max-width: 46rem;
+  max-width: 58rem;
 }
 
 .story-block {
@@ -106,12 +109,15 @@
   margin: 0 0 var(--space-2xl);
 }
 
+// Large and prominent — fills the full reading column (no cap like the
+// old 32rem inset) rather than reading as a small inline thumbnail.
+// `height: auto` (no aspect-ratio/object-fit crop) is deliberate: it
+// keeps the photo's full, uncropped frame so both faces always stay
+// visible, on every screen size.
 .story-photo img {
   display: block;
   width: 100%;
-  max-width: 32rem;
   height: auto;
-  margin-inline: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
@@ -182,12 +188,35 @@
 }
 
 @media (max-width: 640px) {
+  // The desktop rhythm (space-2xl = 88px) between every block, the photo,
+  // the pull-quote, and the closing card adds up to a lot of dead air on
+  // a narrow, linearly-scrolled screen — tightened here so the page still
+  // feels spacious without feeling unnecessarily long. Desktop spacing is
+  // untouched.
+  .story {
+    padding-block: var(--space-xl);
+  }
+
+  .story-block {
+    margin-bottom: var(--space-xl);
+  }
+
   .story-block--emphasis {
     margin-inline: 0;
     padding: var(--space-md);
   }
 
+  .story-photo {
+    margin-bottom: var(--space-xl);
+  }
+
   .story-pullquote {
     font-size: var(--fs-display-sm);
+    padding-block: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .story-closing {
+    padding: var(--space-xl) var(--space-md);
   }
 }
