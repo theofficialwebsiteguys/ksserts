@@ -6,22 +6,35 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
+}
+
+// The whole image+title+badges block is one button (tap to reveal price),
+// per client mockup — text-align/appearance reset since it's semantically
+// a button but should read as plain card content, not a form control.
+.product-card__toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  width: 100%;
+  text-align: center;
 }
 
 .product-card__media {
   position: relative;
   display: block;
+  width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-surface);
+  // background: var(--color-surface);
 }
 
 .product-card__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  // object-fit: cover;
   transition: transform var(--transition-slow);
 }
 
@@ -77,22 +90,92 @@
   opacity: 0.55;
 }
 
+// Bold, condensed, all-caps title — client-provided mockup style,
+// deliberately different from the script font used for headings elsewhere.
+.product-card__title {
+  font-family: var(--font-impact);
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-top: var(--space-3xs);
+}
+
+.product-card__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.product-card__toggle:hover .product-card__hint {
+  color: var(--color-brand-accent);
+}
+
+.product-card__hint-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  transition: transform var(--transition-fast);
+}
+
+.product-card__hint-icon.is-open {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card__hint-icon {
+    transition: none;
+  }
+}
+
+// Auto-height reveal: animating a CSS grid track (0fr -> 1fr) gives a smooth
+// expand/collapse without JS height measurement or a jarring @if pop-in/out.
+.product-card__body-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-slow);
+}
+
+.product-card__body-wrap.is-open {
+  grid-template-rows: 1fr;
+}
+
+.product-card__body > * {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.product-card__body-wrap.is-open .product-card__body > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card__body-wrap,
+  .product-card__body > * {
+    transition: none;
+  }
+}
+
+// Revealed on tap — price + purchase actions, hidden until then.
 .product-card__body {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-2xs);
-  flex: 1;
-}
-
-.product-card__title {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.product-card__title a:hover {
-  color: var(--color-brand-accent);
+  text-align: center;
+  padding-top: var(--space-2xs);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-3xs);
+  overflow: hidden;
+  min-height: 0;
 }
 
 .product-card__price {
@@ -114,6 +197,68 @@
 }
 
 .product-card__actions {
-  margin-top: auto;
-  padding-top: var(--space-2xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  width: 100%;
+}
+
+// One row per diet variant — its own price, its own quantity, its own Add.
+.product-card__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  width: 100%;
+  text-align: left;
+}
+
+.product-card__option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: var(--space-2xs);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.product-card__option-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2xs);
+}
+
+.product-card__option-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.product-card__option-price {
+  font-weight: 700;
+}
+
+.product-card__option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xs);
+}
+
+.product-card__option-row .btn {
+  flex: 1;
+}
+
+.product-card__link {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.product-card__link:hover {
+  color: var(--color-brand-accent);
 }

@@ -25,3 +25,14 @@
   text-align: center;
   font-weight: 600;
 }
+
+.qty--compact .qty__btn {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.95rem;
+}
+
+.qty--compact .qty__value {
+  min-width: 1.6rem;
+  font-size: 0.85rem;
+}

@@ -1,64 +1,117 @@
 <article class="product-card" [class.product-card--unavailable]="!available()">
-  <a class="product-card__media" [routerLink]="['/shop', product().handle]">
-    @if (primaryImage(); as image) {
-      <img
-        [src]="image.url"
-        [alt]="image.altText || product().title"
-        loading="lazy"
-        decoding="async"
-        width="600"
-        height="600"
-      />
-    } @else {
-      <div class="product-card__media-placeholder" aria-hidden="true">
-        <span>K'sserts</span>
-      </div>
-    }
-    @if (!available()) {
-      <span class="product-card__sold-out">Sold Out</span>
-    } @else if (onSale()) {
-      <span class="product-card__sale-flag">Sale</span>
-    }
-  </a>
-
-  <div class="product-card__body">
-    <app-dietary-badges [badges]="dietaryBadges()" size="sm" />
-
-    <h3 class="product-card__title">
-      <a [routerLink]="['/shop', product().handle]">{{ product().title }}</a>
-    </h3>
-
-    <p class="product-card__price">
-      <span class="product-card__price-current" [class.product-card__price-current--sale]="onSale()">
-        {{ priceDisplay() }}
-      </span>
-      @if (compareAtDisplay(); as compareAt) {
-        <span class="product-card__compare-at">{{ compareAt }}</span>
-      }
-    </p>
-
-    <div class="product-card__actions">
-      @if (!available()) {
-        <a class="btn btn--outline-dark btn--sm btn--block" [routerLink]="['/shop', product().handle]">
-          View Options
-        </a>
-      } @else if (canQuickAdd()) {
-        <button
-          type="button"
-          class="btn btn--primary btn--sm btn--block"
-          (click)="quickAdd()"
-          [disabled]="adding()"
-        >
-          @if (adding()) {
-            Adding...
-          } @else {
-            Quick Add
-          }
-        </button>
+  <button
+    type="button"
+    class="product-card__toggle"
+    (click)="toggleExpanded()"
+    [attr.aria-expanded]="expanded()"
+    [attr.aria-label]="(expanded() ? 'Hide price for ' : 'Show price for ') + product().title"
+  >
+    <span class="product-card__media">
+      @if (primaryImage(); as image) {
+        <img
+          [src]="image.url"
+          [alt]="image.altText || product().title"
+          loading="lazy"
+          decoding="async"
+          width="600"
+          height="600"
+        />
       } @else {
-        <a class="btn btn--outline-dark btn--sm btn--block" [routerLink]="['/shop', product().handle]">
-          View Details
-        </a>
+        <span class="product-card__media-placeholder" aria-hidden="true">
+          <span>K'sserts</span>
+        </span>
+      }
+      @if (!available()) {
+        <span class="product-card__sold-out">Sold Out</span>
+      } @else if (onSale()) {
+        <span class="product-card__sale-flag">Sale</span>
+      }
+    </span>
+
+    <span class="product-card__title">{{ product().title }}</span>
+
+    <app-dietary-badges [badges]="dietaryBadges()" variant="circle" />
+
+    <span class="product-card__hint" aria-hidden="true">
+      {{ expanded() ? 'Hide price' : 'Tap for price' }}
+      <svg class="product-card__hint-icon" [class.is-open]="expanded()" viewBox="0 0 16 16" fill="none">
+        <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+  </button>
+
+  <div class="product-card__body-wrap" [class.is-open]="expanded()" [attr.inert]="expanded() ? null : ''">
+    <div class="product-card__body">
+      @if (groupOptions(); as options) {
+        <ul class="product-card__options">
+          @for (option of options; track option.id) {
+            <li class="product-card__option">
+              <div class="product-card__option-head">
+                <span class="product-card__option-label">{{ dietLabel(option) }}</span>
+                <span class="product-card__option-price">{{ formatMoney(option.priceRange.minVariantPrice) }}</span>
+              </div>
+              <div class="product-card__option-row">
+                <app-quantity-selector
+                  [compact]="true"
+                  [value]="getOptionQuantity(option.id)"
+                  [label]="dietLabel(option) + ' ' + product().title"
+                  [disabled]="isOptionBusy(option.id) || !option.availableForSale"
+                  (valueChange)="setOptionQuantity(option.id, $event)"
+                />
+                <button
+                  type="button"
+                  class="btn btn--primary btn--sm"
+                  (click)="addOption(option)"
+                  [disabled]="isOptionBusy(option.id) || !option.availableForSale"
+                >
+                  @if (isOptionBusy(option.id)) {
+                    Adding...
+                  } @else if (!option.availableForSale) {
+                    Sold Out
+                  } @else {
+                    Add
+                  }
+                </button>
+              </div>
+            </li>
+          }
+        </ul>
+        <a class="product-card__link" [routerLink]="['/shop', product().handle]">View full details</a>
+      } @else {
+        <p class="product-card__price">
+          <span class="product-card__price-current" [class.product-card__price-current--sale]="onSale()">
+            {{ priceDisplay() }}
+          </span>
+          @if (compareAtDisplay(); as compareAt) {
+            <span class="product-card__compare-at">{{ compareAt }}</span>
+          }
+        </p>
+
+        <div class="product-card__actions">
+          @if (!available()) {
+            <a class="btn btn--outline-dark btn--sm btn--block" [routerLink]="['/shop', product().handle]">
+              View Options
+            </a>
+          } @else if (canQuickAdd()) {
+            <button
+              type="button"
+              class="btn btn--primary btn--sm btn--block"
+              (click)="quickAdd()"
+              [disabled]="adding()"
+            >
+              @if (adding()) {
+                Adding...
+              } @else {
+                Quick Add
+              }
+            </button>
+            <a class="product-card__link" [routerLink]="['/shop', product().handle]">Full details</a>
+          } @else {
+            <a class="btn btn--outline-dark btn--sm btn--block" [routerLink]="['/shop', product().handle]">
+              View Details
+            </a>
+          }
+        </div>
       }
     </div>
   </div>

@@ -34,3 +34,25 @@
   width: 12px;
   height: 12px;
 }
+
+// Icon-only circular badges — shop product card style, per client mockup.
+.dietary-badges--circle {
+  gap: 0.5rem;
+}
+
+.dietary-badges--circle .dietary-badges__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-cream-50);
+}
+
+.dietary-badges--circle .dietary-badges__icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

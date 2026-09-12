@@ -4,7 +4,7 @@ import { Component, input, output } from '@angular/core';
   selector: 'app-quantity-selector',
   standalone: true,
   template: `
-    <div class="qty" role="group" [attr.aria-label]="'Quantity for ' + label()">
+    <div class="qty" [class.qty--compact]="compact()" role="group" [attr.aria-label]="'Quantity for ' + label()">
       <button
         type="button"
         class="qty__btn"
@@ -34,6 +34,8 @@ export class QuantitySelectorComponent {
   max = input(20);
   disabled = input(false);
   label = input('item');
+  /** Smaller footprint for tight spaces like an expanded shop card. */
+  compact = input(false);
   valueChange = output<number>();
 
   increase(): void {

@@ -110,6 +110,10 @@
   // at a given nominal size (smaller x-height, lighter strokes).
   --font-display: 'Caveat', 'Segoe UI', cursive;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  // Bold, condensed, all-caps-friendly — used only for the shop product
+  // card title (client-provided mockup), a deliberate departure from the
+  // script display font used everywhere else.
+  --font-impact: 'Anton', 'Segoe UI', sans-serif;
 
   // Bumped up from the original scale — client asked for larger type overall
   // on the new dark background.
