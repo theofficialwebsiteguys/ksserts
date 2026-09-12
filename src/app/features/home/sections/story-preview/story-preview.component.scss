@@ -47,6 +47,21 @@
   font-size: var(--fs-body-lg);
 }
 
+.story-preview__media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.story-preview__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 768 / 560;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
 .story-preview__quote {
   background: var(--color-surface);
   border-left: 3px solid var(--color-coral-700);
