@@ -18,27 +18,26 @@
   background: linear-gradient(180deg, rgba(51, 43, 45, 0.85), rgba(51, 43, 45, 0.9));
 }
 
-.gofundme__cutout {
-  position: absolute;
-  z-index: 0;
-  bottom: -2rem;
-  left: 3%;
-  width: 220px;
-  opacity: 0.85;
-  --cutout-rotate: 7deg;
+// A real, prominent progress photo — not a small decorative accent — so
+// the transformation actually reads at a glance. Same rounded-corner
+// treatment as the other real photos on the site (cafe/story sections).
+.gofundme__progress {
+  margin: var(--space-xl) 0 0;
 }
 
-@media (max-width: 900px) {
-  .gofundme__cutout {
-    width: 150px;
-  }
+.gofundme__progress img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
-@media (max-width: 640px) {
-  .gofundme__cutout {
-    width: 100px;
-    bottom: -1rem;
-  }
+.gofundme__progress figcaption {
+  margin-top: var(--space-2xs);
+  font-size: var(--fs-body-sm);
+  font-style: italic;
+  color: var(--color-text-muted);
 }
 
 .gofundme__inner {

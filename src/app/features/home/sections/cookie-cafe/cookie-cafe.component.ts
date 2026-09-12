@@ -1,8 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { Component } from '@angular/core';
 
-import { CommerceApiService } from '../../../../core/api/commerce-api.service';
-import { ProductImage } from '../../../../core/models/product.model';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
 
 interface CafeAudience {
@@ -24,16 +21,6 @@ const AUDIENCES: CafeAudience[] = [
   templateUrl: './cookie-cafe.component.html',
   styleUrl: './cookie-cafe.component.scss'
 })
-export class CookieCafeComponent implements OnInit {
-  private readonly commerceApi = inject(CommerceApiService);
-
+export class CookieCafeComponent {
   protected readonly audiences = AUDIENCES;
-  protected visualImage = signal<ProductImage | null>(null);
-
-  ngOnInit(): void {
-    this.commerceApi
-      .getShowcaseImages(1, 8)
-      .pipe(catchError(() => of([])))
-      .subscribe((images) => this.visualImage.set(images[0] ?? null));
-  }
 }

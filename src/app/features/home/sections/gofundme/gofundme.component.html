@@ -3,15 +3,6 @@
   [class.gofundme--photo]="backdropImage()"
   aria-labelledby="gofundme-heading"
 >
-  @if (!backdropImage()) {
-    <img
-      src="assets/cutouts/gf-choc-smores.png"
-      alt=""
-      class="gofundme__cutout"
-      appCutoutReveal
-    />
-  }
-
   <div class="container gofundme__inner" appReveal>
     <p class="eyebrow">Support the Dream</p>
     <h2 id="gofundme-heading" class="gofundme__title">Help Us Open the Café Doors</h2>
@@ -27,5 +18,10 @@
     } @else {
       <p class="gofundme__placeholder">Our fundraising campaign is coming soon — check back for details.</p>
     }
+
+    <figure class="gofundme__progress">
+      <img src="assets/ksserts-cafe-in-porgress.jpg" alt="" loading="lazy" />
+      <figcaption>The K'sserts Cookie Café is taking shape.</figcaption>
+    </figure>
   </div>
 </section>
