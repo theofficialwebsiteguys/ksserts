@@ -24,9 +24,14 @@
     <ul class="dietary__grid">
       @for (option of options; track option.title) {
         <li class="dietary-card" appReveal>
-          <span class="dietary-card__icon" [class.dietary-card__icon--logo]="option.imageSrc" aria-hidden="true">
+          <span
+            class="dietary-card__icon"
+            [class.dietary-card__icon--logo]="option.imageSrc"
+            [class.dietary-card__icon--wide]="option.wide"
+            aria-hidden="true"
+          >
             @if (option.imageSrc; as src) {
-              <img [src]="src" alt="" class="dietary-card__logo" />
+              <img [src]="src" alt="" class="dietary-card__logo" [class.dietary-card__logo--wide]="option.wide" />
             } @else {
               <svg viewBox="0 0 48 48" fill="none">
                 <path
@@ -38,7 +43,7 @@
               </svg>
             }
           </span>
-          <h3 class="dietary-card__title">{{ option.title }}</h3>
+          <h3 class="dietary-card__title" [class.dietary-card__title--badge]="option.imageSrc">{{ option.title }}</h3>
           <p class="dietary-card__desc">{{ option.description }}</p>
         </li>
       }

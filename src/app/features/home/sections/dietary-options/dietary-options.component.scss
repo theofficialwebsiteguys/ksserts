@@ -103,9 +103,23 @@
 
 // Real badge art (gluten-free/vegan/diabetic-friendly) is already
 // full-color, so it sits on a neutral chip instead of the coral tint used
-// for the one remaining hand-drawn icon (Specialty Desserts).
+// for the one remaining hand-drawn icon (Specialty Desserts). Sized up to
+// 150% of the base chip (client request: make the dietary badges read as
+// a real feature, not a small afterthought) — the cards have room to spare.
 .dietary-card__icon--logo {
+  width: 5.25rem;
+  height: 5.25rem;
   background: var(--color-cream-50);
+}
+
+// gf-vegan.png is a wide pill graphic (not square) — a circle chip would
+// letterbox it down to a thin sliver, so it gets its own wide chip instead.
+// Sized to ~140% (per client spec) while keeping the same chip *height* as
+// the circular badges so all four read as equally prominent.
+.dietary-card__icon--wide {
+  width: 10.4rem;
+  height: 5rem;
+  border-radius: var(--radius-pill);
 }
 
 .dietary-card__icon svg {
@@ -114,14 +128,25 @@
 }
 
 .dietary-card__logo {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.75rem;
+  height: 3.75rem;
   object-fit: contain;
+}
+
+.dietary-card__logo--wide {
+  width: 8.9rem;
+  height: 3.5rem;
 }
 
 .dietary-card__title {
   font-size: 1.15rem;
   margin-bottom: var(--space-3xs);
+}
+
+// The four real dietary badges' names, bumped ~122% per client spec — the
+// Specialty Desserts card (no badge art) keeps the original size.
+.dietary-card__title--badge {
+  font-size: 1.4rem;
 }
 
 .dietary-card__desc {

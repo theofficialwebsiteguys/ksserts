@@ -11,6 +11,8 @@ interface DietaryOption {
   imageSrc?: string;
   /** Hand-drawn fallback icon, only for options with no badge art. */
   icon?: 'specialty';
+  /** gf-vegan.png is a wide pill graphic, not a square/circle badge — needs its own wider chip to render at full size instead of being letterboxed. */
+  wide?: boolean;
 }
 
 const OPTIONS: DietaryOption[] = [
@@ -32,7 +34,8 @@ const OPTIONS: DietaryOption[] = [
   {
     title: 'Gluten-Free + Vegan',
     description: 'Made without gluten-containing ingredients, dairy, or eggs because more options should never mean less flavor.',
-    imageSrc: 'assets/badges/gf-vegan.png'
+    imageSrc: 'assets/badges/gf-vegan.png',
+    wide: true
   },
   {
     title: 'Specialty Desserts',
